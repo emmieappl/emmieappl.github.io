@@ -13,11 +13,9 @@ format:
 ```{r}
 tuesdata <- tidytuesdayR::tt_load('2024-02-13')
 
-library(ggplot2)
-```
-
-```{r}
 historical_spending <- tuesdata$historical_spending
+
+library(ggplot2)
 
 ggplot(historical_spending, aes(x = Year, y = PerPerson)) +
   geom_col() +

@@ -11,7 +11,7 @@ website:
       - text: Data Viz
         menu:
           - text: "Valentine's"
-            href: Valentine's.qmd
+            href: Valentines.qmd
           - text: "European Drug Development"
             href: UKdrugs.qmd
 

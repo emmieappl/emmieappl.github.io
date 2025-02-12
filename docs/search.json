@@ -32,13 +32,20 @@
     "href": "Valentine's.html",
     "title": "Valentine’s Day",
     "section": "",
-    "text": "Show the code\ntuesdata &lt;- tidytuesdayR::tt_load('2024-02-13')\n\n\n---- Compiling #TidyTuesday Information for 2024-02-13 ----\n--- There are 3 files available ---\n\n\n── Downloading files ───────────────────────────────────────────────────────────\n\n  1 of 3: \"historical_spending.csv\"\n  2 of 3: \"gifts_age.csv\"\n  3 of 3: \"gifts_gender.csv\"\n\n\nShow the code\nlibrary(ggplot2)\n\n\n\n\nShow the code\nhistorical_spending &lt;- tuesdata$historical_spending\n\nggplot(historical_spending, aes(x = Year, y = PerPerson)) +\n  geom_col() +\n  labs(\n    x = \"Year\",\n    y = \"Average Money Spent per Person ($)\"\n  )"
+    "text": "Show the code\ntuesdata &lt;- tidytuesdayR::tt_load('2024-02-13')\n\n\n---- Compiling #TidyTuesday Information for 2024-02-13 ----\n--- There are 3 files available ---\n\n\n── Downloading files ───────────────────────────────────────────────────────────\n\n  1 of 3: \"historical_spending.csv\"\n  2 of 3: \"gifts_age.csv\"\n  3 of 3: \"gifts_gender.csv\"\n\n\nShow the code\nhistorical_spending &lt;- tuesdata$historical_spending\n\nlibrary(ggplot2)\n\nggplot(historical_spending, aes(x = Year, y = PerPerson)) +\n  geom_col() +\n  labs(\n    x = \"Year\",\n    y = \"Average Money Spent per Person ($)\"\n  )"
   },
   {
     "objectID": "UKdrugs.html",
     "href": "UKdrugs.html",
     "title": "European Drug Development",
     "section": "",
-    "text": "Show the code\ntuesdata &lt;- tidytuesdayR::tt_load('2023-03-14')\n\n\n---- Compiling #TidyTuesday Information for 2023-03-14 ----\n--- There is 1 file available ---\n\n\n── Downloading files ───────────────────────────────────────────────────────────\n\n  1 of 1: \"drugs.csv\"\n\n\nShow the code\ndrugs &lt;- tuesdata$drugs\n\nlibrary(ggplot2)\n\nggplot(drugs, aes(y = generic)) +\n  geom_bar(aes(fill = accelerated_assessment)) +\n  labs(\n    y = \"Generic Medicine\",\n    x = \"Drug Count\",\n    fill = \"Accelerated Assessment\"\n  )"
+    "text": "This data set includes the drugs considered for authorization in the European Union between 1995 and 2023. A generic medicine is developed to be the same as a medicine that has already been authorized, with the same active ingredient(s) and dosage(s) to treat the same condition(s). Accelerated assessment indicates that the medicine is a major interest for public health, so its timeframe for review is 150 evaluation days rather than 210.\n\n\nShow the code\ntuesdata &lt;- tidytuesdayR::tt_load('2023-03-14')\n\n\n---- Compiling #TidyTuesday Information for 2023-03-14 ----\n--- There is 1 file available ---\n\n\n── Downloading files ───────────────────────────────────────────────────────────\n\n  1 of 1: \"drugs.csv\"\n\n\nShow the code\ndrugs &lt;- tuesdata$drugs\n\nlibrary(ggplot2)\n\nggplot(drugs, aes(y = generic)) +\n  geom_bar(aes(fill = accelerated_assessment)) +\n  labs(\n    y = \"Generic Medicine\",\n    x = \"Drug Count\",\n    fill = \"Accelerated Assessment\"\n  )\n\n\n\n\n\n\n\n\n\nTidyTuesday 2023-03-14\nData from European Medicines Agency via Miquel Anglada Girotto"
+  },
+  {
+    "objectID": "Valentines.html",
+    "href": "Valentines.html",
+    "title": "Valentine’s Day",
+    "section": "",
+    "text": "Show the code\ntuesdata &lt;- tidytuesdayR::tt_load('2024-02-13')\n\n\n---- Compiling #TidyTuesday Information for 2024-02-13 ----\n--- There are 3 files available ---\n\n\n── Downloading files ───────────────────────────────────────────────────────────\n\n  1 of 3: \"historical_spending.csv\"\n  2 of 3: \"gifts_age.csv\"\n  3 of 3: \"gifts_gender.csv\"\n\n\nShow the code\nhistorical_spending &lt;- tuesdata$historical_spending\n\nlibrary(ggplot2)\n\nggplot(historical_spending, aes(x = Year, y = PerPerson)) +\n  geom_col() +\n  labs(\n    x = \"Year\",\n    y = \"Average Money Spent per Person ($)\"\n  )"
   }
 ]
