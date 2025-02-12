@@ -12,6 +12,8 @@ website:
         menu:
           - text: "Valentine's"
             href: Valentine's.qmd
+          - text: "European Drug Development"
+            href: UKdrugs.qmd
 
 format:
   html:
