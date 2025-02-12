@@ -10,6 +10,8 @@ format:
     code-summary: "Show the code"
 ---
 
+This data was collected by the National Retail Federation in the United States and explores how consumers celebrate Valentine's Day from 2010 to 2022.
+
 ```{r}
 tuesdata <- tidytuesdayR::tt_load('2024-02-13')
 
@@ -24,3 +26,7 @@ ggplot(historical_spending, aes(x = Year, y = PerPerson)) +
     y = "Average Money Spent per Person ($)"
   )
 ```
+
+[TidyTuesday 2024-02-13](https://github.com/rfordatascience/tidytuesday/blob/main/data/2024/2024-02-13/readme.md)
+
+Data from the [National Retail Federation](https://nrf.com/research-insights/holiday-data-and-trends/valentines-day/valentines-day-data-center) via [Sunja aa Kaggle](https://www.kaggle.com/datasets/infinator/happy-valentines-day-2022)
