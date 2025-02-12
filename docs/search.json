@@ -2,7 +2,7 @@
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "Data Viz",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n[1] 2"
   },
@@ -12,5 +12,26 @@
     "title": "Emmie Appl",
     "section": "",
     "text": "Hello there! I am a Pomona College class of 2025 Molecular Biology major and Japanese minor. Currently, I am working as an undergraduate researcher in the Liu Lab studying mannitol-driven biofilm formation in Vibrio cholerae. Outside of the lab, I am a captain for the Pomona-Pitzer Swimming & Diving team.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "DataViz.html",
+    "href": "DataViz.html",
+    "title": "Data Viz",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "Cheese.html",
+    "href": "Cheese.html",
+    "title": "Cheese",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "Valentine's.html",
+    "href": "Valentine's.html",
+    "title": "Cheese",
+    "section": "",
+    "text": "Show the code\ntuesdata &lt;- tidytuesdayR::tt_load('2024-02-13')\n\n\n---- Compiling #TidyTuesday Information for 2024-02-13 ----\n--- There are 3 files available ---\n\n\n── Downloading files ───────────────────────────────────────────────────────────\n\n  1 of 3: \"historical_spending.csv\"\n  2 of 3: \"gifts_age.csv\"\n  3 of 3: \"gifts_gender.csv\"\n\n\nShow the code\nlibrary(ggplot2)\n\n\n\n\nShow the code\nhistorical_spending &lt;- tuesdata$historical_spending\n\nggplot(historical_spending, aes(x = Year, y = PerPerson)) +\n  geom_col() +\n  labs(\n    x = \"Year\",\n    y = \"Average Money Spent per Person ($)\"\n  )"
   }
 ]

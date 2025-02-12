@@ -1,0 +1,28 @@
+---
+title: "Valentine's Day"
+description: |
+  Analysis of Valentine's Day data from TidyTuesday
+author: Emmie Appl
+date: February 12, 2025
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+---
+
+```{r}
+tuesdata <- tidytuesdayR::tt_load('2024-02-13')
+
+library(ggplot2)
+```
+
+```{r}
+historical_spending <- tuesdata$historical_spending
+
+ggplot(historical_spending, aes(x = Year, y = PerPerson)) +
+  geom_col() +
+  labs(
+    x = "Year",
+    y = "Average Money Spent per Person ($)"
+  )
+```

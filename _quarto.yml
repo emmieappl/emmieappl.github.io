@@ -3,18 +3,22 @@ project:
   output-dir: docs
 
 website:
-  title: "emmieappl.github.io"
+  title: "Emmie Appl"
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - text: Data Viz
+        menu:
+          - text: "Valentine's"
+            href: Valentine's.qmd
 
 format:
   html:
     theme: cosmo
     css: styles.css
     toc: true
+    page-layout: full
 
 editor: visual
 
