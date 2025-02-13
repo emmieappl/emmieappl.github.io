@@ -8,6 +8,9 @@ format:
   html:
     code-fold: true
     code-summary: "Show the code"
+execute:
+  warning: false
+  message: false
 ---
 
 This data was collected by the National Retail Federation in the United States and explores how consumers celebrate Valentine's Day from 2010 to 2022.

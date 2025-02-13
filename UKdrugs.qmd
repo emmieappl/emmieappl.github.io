@@ -8,6 +8,9 @@ format:
   html:
     code-fold: true
     code-summary: "Show the code"
+execute:
+  warning: false
+  message: false
 ---
 
 This data set includes the drugs considered for authorization in the European Union between 1995 and 2023. A generic medicine is developed to be the same as a medicine that has already been authorized, with the same active ingredient(s) and dosage(s) to treat the same condition(s). Accelerated assessment indicates that the medicine is a major interest for public health, so its timeframe for review is 150 evaluation days rather than 210.
