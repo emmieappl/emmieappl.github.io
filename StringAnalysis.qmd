@@ -1,0 +1,14 @@
+---
+title: "String Analysis"
+description: |
+  Analysis of *Friends* Dialogue
+author: Emmie Appl
+date: March 2, 2025
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+execute:
+  warning: false
+  message: false
+---
