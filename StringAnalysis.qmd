@@ -17,7 +17,22 @@ execute:
 library(friends)
 library(tidyverse)
 
-
+friends |>
+  group_by(speaker) |>
+  summarize(count = n()) |>
+  arrange(desc(count))
 ```
 
+```{r}
+questions <- friends |>
+    select(text, speaker) |>
+    filter(str_detect(speaker, "Rachel Green|Monica Geller|Phoebe Buffay|Joey Tribbiani$|Chandler Bing|Ross Geller")) |>
+    filter(str_detect(text, "\\?")) |>
+    group_by(speaker) |>
+    summarize(num_questions = n())
+  
+
 questions
+```
+
+Who asks the most questions?

@@ -53,6 +53,6 @@
     "href": "StringAnalysis.html",
     "title": "String Analysis",
     "section": "",
-    "text": "Show the code\nlibrary(friends)\nlibrary(tidyverse)\n\n\nquestions"
+    "text": "Show the code\nlibrary(friends)\nlibrary(tidyverse)\n\nfriends |&gt;\n  group_by(speaker) |&gt;\n  summarize(count = n()) |&gt;\n  arrange(desc(count))\n\n\n# A tibble: 700 × 2\n   speaker          count\n   &lt;chr&gt;            &lt;int&gt;\n 1 Rachel Green      9307\n 2 Ross Geller       9157\n 3 Chandler Bing     8462\n 4 Monica Geller     8440\n 5 Joey Tribbiani    8171\n 6 Phoebe Buffay     7499\n 7 Scene Directions  6060\n 8 #ALL#              347\n 9 Mike Hannigan      330\n10 Richard Burke      281\n# ℹ 690 more rows\n\n\n\n\nShow the code\nquestions &lt;- friends |&gt;\n    select(text, speaker) |&gt;\n    filter(str_detect(speaker, \"Rachel Green|Monica Geller|Phoebe Buffay|Joey Tribbiani$|Chandler Bing|Ross Geller\")) |&gt;\n    filter(str_detect(text, \"\\\\?\")) |&gt;\n    group_by(speaker) |&gt;\n    summarize(num_questions = n())\n  \n\nquestions\n\n\n# A tibble: 6 × 2\n  speaker        num_questions\n  &lt;chr&gt;                  &lt;int&gt;\n1 Chandler Bing           2628\n2 Joey Tribbiani          2753\n3 Monica Geller           2806\n4 Phoebe Buffay           2157\n5 Rachel Green            2923\n6 Ross Geller             2990\n\n\nWho asks the most questions?"
   }
 ]
