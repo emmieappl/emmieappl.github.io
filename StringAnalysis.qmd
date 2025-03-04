@@ -25,14 +25,29 @@ friends |>
 
 ```{r}
 questions <- friends |>
-    select(text, speaker) |>
-    filter(str_detect(speaker, "Rachel Green|Monica Geller|Phoebe Buffay|Joey Tribbiani$|Chandler Bing|Ross Geller")) |>
-    filter(str_detect(text, "\\?")) |>
-    group_by(speaker) |>
-    summarize(num_questions = n())
+  select(text, speaker) |>
+  filter(str_detect(speaker, "Rachel Green|Monica Geller|Phoebe Buffay|Joey Tribbiani$|Chandler Bing|Ross Geller")) |>
+  filter(str_detect(text, "\\?")) |>
+  group_by(speaker) |>
+  summarize(num_questions = n())
+
+totalnumber <- friends |>
+  select(text, speaker) |>
+  filter(str_detect(speaker, "Rachel Green|Monica Geller|Phoebe Buffay|Joey Tribbiani$|Chandler Bing|Ross Geller")) |>
+  group_by(speaker) |>
+  summarize(num_utterances = n())
   
+  
+questionsandtotal <- full_join(questions, totalnumber) |>
+  mutate(propquestions = num_questions/num_utterances)
 
 questions
+totalnumber
+questionsandtotal
 ```
 
 Who asks the most questions?
+
+count the total number of question marks, not just the number of strings with question marks
+
+calculate % questions out of all utterances

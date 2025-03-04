@@ -233,14 +233,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>questions <span class="ot">&lt;-</span> friends <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(text, speaker) <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">str_detect</span>(speaker, <span class="st">"Rachel Green|Monica Geller|Phoebe Buffay|Joey Tribbiani$|Chandler Bing|Ross Geller"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">str_detect</span>(text, <span class="st">"</span><span class="sc">\\</span><span class="st">?"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(speaker) <span class="sc">|&gt;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">num_questions =</span> <span class="fu">n</span>())</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>questions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(text, speaker) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(speaker, <span class="st">"Rachel Green|Monica Geller|Phoebe Buffay|Joey Tribbiani$|Chandler Bing|Ross Geller"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(text, <span class="st">"</span><span class="sc">\\</span><span class="st">?"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(speaker) <span class="sc">|&gt;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">num_questions =</span> <span class="fu">n</span>())</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>totalnumber <span class="ot">&lt;-</span> friends <span class="sc">|&gt;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(text, speaker) <span class="sc">|&gt;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(speaker, <span class="st">"Rachel Green|Monica Geller|Phoebe Buffay|Joey Tribbiani$|Chandler Bing|Ross Geller"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(speaker) <span class="sc">|&gt;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">num_utterances =</span> <span class="fu">n</span>())</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>questionsandtotal <span class="ot">&lt;-</span> <span class="fu">full_join</span>(questions, totalnumber) <span class="sc">|&gt;</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">propquestions =</span> num_questions<span class="sc">/</span>num_utterances)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>questions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 2
@@ -253,8 +262,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 5 Rachel Green            2923
 6 Ross Geller             2990</code></pre>
 </div>
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>totalnumber</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  speaker        num_utterances
+  &lt;chr&gt;                   &lt;int&gt;
+1 Chandler Bing            8462
+2 Joey Tribbiani           8171
+3 Monica Geller            8440
+4 Phoebe Buffay            7499
+5 Rachel Green             9307
+6 Ross Geller              9157</code></pre>
+</div>
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>questionsandtotal</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  speaker        num_questions num_utterances propquestions
+  &lt;chr&gt;                  &lt;int&gt;          &lt;int&gt;         &lt;dbl&gt;
+1 Chandler Bing           2628           8462         0.311
+2 Joey Tribbiani          2753           8171         0.337
+3 Monica Geller           2806           8440         0.332
+4 Phoebe Buffay           2157           7499         0.288
+5 Rachel Green            2923           9307         0.314
+6 Ross Geller             2990           9157         0.327</code></pre>
+</div>
 </div>
 <p>Who asks the most questions?</p>
+<p>count the total number of question marks, not just the number of strings with question marks</p>
+<p>calculate % questions out of all utterances</p>
 
 
 
