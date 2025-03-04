@@ -12,3 +12,12 @@ execute:
   warning: false
   message: false
 ---
+
+```{r}
+library(friends)
+library(tidyverse)
+
+
+```
+
+questions

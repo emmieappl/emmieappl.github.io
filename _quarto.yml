@@ -15,7 +15,7 @@ website:
           - text: "European Drug Development"
             href: UKdrugs.html
       - text: "String Analysis"
-        href: String.Analysis.html
+        href: StringAnalysis.html
 
 format:
   html:

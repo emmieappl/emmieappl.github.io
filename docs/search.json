@@ -47,5 +47,12 @@
     "title": "Valentine’s Day",
     "section": "",
     "text": "This data was collected by the National Retail Federation in the United States and explores how consumers celebrate Valentine’s Day from 2010 to 2022.\n\n\nShow the code\ntuesdata &lt;- tidytuesdayR::tt_load('2024-02-13')\n\nhistorical_spending &lt;- tuesdata$historical_spending\n\nlibrary(ggplot2)\n\nggplot(historical_spending, aes(x = Year, y = PerPerson)) +\n  geom_col() +\n  labs(\n    x = \"Year\",\n    y = \"Average Money Spent per Person ($)\"\n  )\n\n\n\n\n\n\n\n\n\nTidyTuesday 2024-02-13\nData from the National Retail Federation via Sunja aa Kaggle"
+  },
+  {
+    "objectID": "StringAnalysis.html",
+    "href": "StringAnalysis.html",
+    "title": "String Analysis",
+    "section": "",
+    "text": "Show the code\nlibrary(friends)\nlibrary(tidyverse)\n\n\nquestions"
   }
 ]
