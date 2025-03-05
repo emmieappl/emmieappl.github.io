@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Emmie Appl">
-<meta name="dcterms.date" content="2025-03-02">
+<meta name="dcterms.date" content="2025-03-05">
 <meta name="description" content="Analysis of Friends Dialogue">
 
 <title>String Analysis – Emmie Appl</title>
@@ -146,7 +146,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
   <li class="nav-item">
     <a class="nav-link active" href="./StringAnalysis.html" aria-current="page"> 
-<span class="menu-text">String Analysis</span></a>
+<span class="menu-text">String Analyses</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -189,7 +189,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 2, 2025</p>
+      <p class="date">March 5, 2025</p>
     </div>
   </div>
   
@@ -201,6 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p>Firstly, I was curious as to which of the six main <em>Friends</em> characters had the most lines overall throughout the entire <em>Friends</em> series. The table below shows that Rachel had the most lines throughout the running of the show while Phoebe had the fewest.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -210,20 +211,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>friends <span class="sc">|&gt;</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(speaker) <span class="sc">|&gt;</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">count =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(count)) <span class="sc">|&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">num_lines =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(num_lines)) <span class="sc">|&gt;</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 2
-  speaker        count
-  &lt;chr&gt;          &lt;int&gt;
-1 Rachel Green    9307
-2 Ross Geller     9157
-3 Chandler Bing   8462
-4 Monica Geller   8440
-5 Joey Tribbiani  8171
-6 Phoebe Buffay   7499</code></pre>
+  speaker        num_lines
+  &lt;chr&gt;              &lt;int&gt;
+1 Rachel Green        9307
+2 Ross Geller         9157
+3 Chandler Bing       8462
+4 Monica Geller       8440
+5 Joey Tribbiani      8171
+6 Phoebe Buffay       7499</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -263,6 +264,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p>The next question I wanted to answer using the <em>Friends</em> data set was “which character asked the most questions?” during their time in the show. I went about answering this question by counting the number of questions each character asked, as well as the number of sentences each character spoke. By dividing the number of questions by the number of sentences (including questions), I calculated the proportion of sentences that were questions for each character. From this, I learned that Monica had the largest proportion of questions while Phoebe had the smallest.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -289,7 +291,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>how the # of utterances of each character changed with time (use string_extract() for the year</p>
+<p>Lastly, I wanted to know how the number of lines spoken by each character changed over the lifetime of the show. Ross began the show with the largest number of lines, but was overtaken by Rachel in 1997. Phoebe consistently had the smallest number of lines, except for in 2001 when Ross’ number of lines dropped to below hers. Because the series began in September of 1994 and ended in May of 2004, these years have fewer lines overall compared to the intermediary years.</p>
+<p>Hvitfeldt E (2021). <em>friends: The Entire Transcript from Friends in Tidy Format.</em> R package version 0.1.0.9000, <a href="https://github.com/EmilHvitfeldt/friends">https://github.com/EmilHvitfeldt/friends</a>.</p>
+<p>Data originally from the <a href="https://github.com/emorynlp/character-mining">Character Mining</a> repository.</p>
 
 
 
