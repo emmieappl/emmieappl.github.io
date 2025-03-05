@@ -16,38 +16,58 @@ execute:
 ```{r}
 library(friends)
 library(tidyverse)
+library(ggplot2)
 
 friends |>
   group_by(speaker) |>
   summarize(count = n()) |>
-  arrange(desc(count))
+  arrange(desc(count)) |>
+  head()
 ```
 
 ```{r}
 questions <- friends |>
   select(text, speaker) |>
   filter(str_detect(speaker, "Rachel Green|Monica Geller|Phoebe Buffay|Joey Tribbiani$|Chandler Bing|Ross Geller")) |>
-  filter(str_detect(text, "\\?")) |>
+  mutate(totalquestions = str_count(text, "\\?")) |>
   group_by(speaker) |>
-  summarize(num_questions = n())
-
+  summarize(num_questions = sum(totalquestions))
+  
 totalnumber <- friends |>
   select(text, speaker) |>
   filter(str_detect(speaker, "Rachel Green|Monica Geller|Phoebe Buffay|Joey Tribbiani$|Chandler Bing|Ross Geller")) |>
+  mutate(totalphrases = str_count(text, "\\?(?=\\s|$)|\\.(?=\\s|$)|\\!(?=\\s|$)")) |>
   group_by(speaker) |>
-  summarize(num_utterances = n())
-  
+  summarize(num_phrases = sum(totalphrases))
   
 questionsandtotal <- full_join(questions, totalnumber) |>
-  mutate(propquestions = num_questions/num_utterances)
+  mutate(propquestions = num_questions/num_phrases) |>
+  arrange(desc(propquestions))
 
-questions
-totalnumber
-questionsandtotal
+ggplot(questionsandtotal, aes(x = speaker, y = propquestions)) +
+  geom_col(fill = "thistle") +
+  labs(
+    x = "Character",
+    y = "Proportion of Sentences that are Questions",
+    title = expression(paste("Which ", italic("Friends "), "Character is the Most Inquisitive?"))
+  )
 ```
 
-Who asks the most questions?
+```{r}
+withyear <- left_join(friends, friends_info, by = c("season", "episode")) |>
+  mutate(year = as.factor(str_sub(air_date, 1, 4))) |>
+  select(text, speaker, year) |>
+  filter(str_detect(speaker, "Rachel Green|Monica Geller|Phoebe Buffay|Joey Tribbiani$|Chandler Bing|Ross Geller")) |>
+  group_by(speaker, year) |>
+  summarize(lines = n())
 
-count the total number of question marks, not just the number of strings with question marks
+ggplot(withyear, aes(x = year, y = lines, group = speaker)) +
+  geom_line(aes(color = speaker)) +
+  labs(
+    x = "Year",
+    y = "Number of Lines",
+    title = expression(paste("Number of Lines Spoken by ", italic("Friends "), "Characters from 1994 to 2004"))
+  )
+```
 
-calculate % questions out of all utterances
+how the \# of utterances of each character changed with time (use string_extract() for the year
