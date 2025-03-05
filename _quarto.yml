@@ -14,7 +14,7 @@ website:
             href: Valentines.html
           - text: "European Drug Development"
             href: UKdrugs.html
-      - text: "String Analysis"
+      - text: "String Analyses"
         href: StringAnalysis.html
 
 format:
