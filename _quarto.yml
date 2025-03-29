@@ -16,8 +16,8 @@ website:
             href: UKdrugs.html
       - text: "String Analyses"
         href: StringAnalysis.html
-      - text: "Birhtday Paradox"
-        href: BirthdayParadox.html
+      - text: "Red Lights"
+        href: RedLights.html
 
 format:
   html:

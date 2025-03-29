@@ -1,0 +1,35 @@
+---
+title: "Red Lights"
+description: |
+  Do drivers actually "always" hit red lights?
+author: Emmie Appl
+date: April 2, 2025
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+execute:
+  warning: false
+  message: false
+---
+
+```{r}
+library(purrr)
+library(ggplot2)
+
+gamble <- function(initial_amount, goal_amount, p_win) {
+  money <- initial_amount
+  steps <- 0
+  
+  while(money > 0 & money < goal_amount){
+    money <- money + ifelse(runif(1) < p_win, 1, -1)
+    steps <- steps + 1
+  }
+  
+  return(ifelse(money <= 0, "Bankrupt", "Win"))
+}
+```
+
+```{r}
+gamble(10, 20, 0.5)
+```

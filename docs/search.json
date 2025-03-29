@@ -61,5 +61,12 @@
     "title": "BirthdayParadox",
     "section": "",
     "text": "Show the code\nsimulate_birthdays &lt;- function(number) {\n  birthdays &lt;- sample(1:365, number, replace = TRUE)\n  any(duplicated(birthdays))\n}\n\nsimulate_birthdays(100)\n\n\n[1] TRUE"
+  },
+  {
+    "objectID": "RedLights.html",
+    "href": "RedLights.html",
+    "title": "Red Lights",
+    "section": "",
+    "text": "Show the code\nlibrary(purrr)\nlibrary(ggplot2)\n\ngamble &lt;- function(initial_amount, goal_amount, p_win) {\n  money &lt;- initial_amount\n  steps &lt;- 0\n  \n  while(money &gt; 0 & money &lt; goal_amount){\n    money &lt;- money + ifelse(runif(1) &lt; p_win, 1, -1)\n    steps &lt;- steps + 1\n  }\n  \n  return(ifelse(money &lt;= 0, \"Bankrupt\", \"Win\"))\n}\n\n\n\n\nShow the code\ngamble(10, 20, 0.5)\n\n\n[1] \"Bankrupt\""
   }
 ]
