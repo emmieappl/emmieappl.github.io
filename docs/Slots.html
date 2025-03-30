@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2025-04-02">
 <meta name="description" content="Slot machine simulation">
 
-<title>Slots – Emmie Appl</title>
+<title>Slots Simulation – Emmie Appl</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -149,8 +149,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">String Analyses</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./RedLights.html"> 
-<span class="menu-text">Red Lights</span></a>
+    <a class="nav-link active" href="./Slots.html" aria-current="page"> 
+<span class="menu-text">Slots Simulation</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -171,7 +171,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Slots</h1>
+<h1 class="title">Slots Simulation</h1>
 </div>
 
 <div>
@@ -206,10 +206,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>The American Gaming Association recently reported that US casinos generated a record-breaking $49.78 billion dollars in 2024, a 0.8% increase over 2023 and the fourth-straight record-breaking year. Of this total, slot machines accounted for $36.06 billion.</p>
-<p>To better understand slot machine odds, I sought to create a function in R that simulates the odds that an individual would either reach their goal revenue or go bankrupt at a slot machine. The function takes an initial amount of money, a goal amount of money, a win probability, and a win multiplier value. To determine whether the individual will reach their goal revenue, the function will generate a random uniform number between 0 and 1. If that number is less than or equal to the win probability, the individual will gain revenue from that round, equal to the win multiplier amount. If the random uniform number is greater than the win probability, then they will lose $1. Then, the next round is played in the form of the generation of another random uniform number. This cycle continues until either 1) the player reaches or exceeds their goal revenue or 2) the player goes bankrupt.</p>
+<p>To better understand slot machine odds, I sought to create a function in R that simulates the odds that an individual would either reach their goal revenue or go bankrupt at a slot machine. The function takes an initial amount of money, a goal amount of money, a win probability, and a win multiplier value. To determine whether the individual will reach their goal amount, the function generates a random uniform number between 0 and 1. If that number is less than or equal to the win probability, the individual will gain revenue from that round, equal to the win multiplier amount. If the random uniform number is greater than the win probability, then they will lose $1. Then, the next round is played by generating another random uniform number. This cycle continues until either 1) the player reaches or exceeds their goal amount or 2) the player goes bankrupt.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -223,158 +221,175 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># True means that the gambler met their goal amount. False means the gambler went bankrupt.</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="at">outcome =</span> <span class="fu">ifelse</span>(money <span class="sc">&lt;=</span> <span class="dv">0</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>))</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
-<p>Some assumptions ingrained into this function are that 1) win probability does not change and 2) each win generates the same amount of revenue.</p>
+<p>Some assumptions engrained into this function are that 1) win probability does not change and 2) each win generates the same amount of revenue. Using map(), the function runs 1,000 times, calculating a win probability representing the fraction of times the player will meet their goal amount out of 1,000 slot machine sessions.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gamble</span>(<span class="dv">10</span>, <span class="dv">100</span>, <span class="fl">0.1</span>, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>gamble_simulation <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n_runs =</span> <span class="dv">1000</span>, initial_amount, goal_amount, p_win,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                              win_multiplier) {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  win_prob <span class="ot">&lt;-</span> <span class="fu">map_lgl</span>(<span class="dv">1</span><span class="sc">:</span>n_runs, <span class="sc">~</span><span class="fu">gamble</span>(initial_amount, goal_amount, p_win,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                                        win_multiplier)) <span class="sc">|&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>()</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">goal_prob =</span> win_prob))</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>I first wanted to investigate how changing the win probability impacts the player’s chances of meeting their goal amount. I set the simulation to give the player an initial amount of $10 and a goal amount of $100. I set the win multiplier to 10, meaning that for every slot session that is won, the player will gain $10.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>changing_p_win <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n_runs =</span> <span class="dv">1000</span>, <span class="at">initial_amount =</span> <span class="dv">10</span>, <span class="at">goal_amount =</span> <span class="dv">100</span>, p_win,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">win_multiplier =</span> <span class="dv">10</span>) {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  win_probs <span class="ot">&lt;-</span> <span class="fu">map_dbl</span>(p_win_values, <span class="cf">function</span>(p_win) {</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    outcome <span class="ot">&lt;-</span> <span class="fu">map_lgl</span>(<span class="dv">1</span><span class="sc">:</span>n_runs, <span class="sc">~</span><span class="fu">gamble</span>(initial_amount, goal_amount, p_win, win_multiplier))</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(outcome)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">p_win =</span> p_win_values, <span class="at">goal_prob =</span> win_probs))</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The probability of reaching the goal amount was calculated for different win probabilities ranging from 0.1 to 0.9. Below are the results.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>p_win_values <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">47</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>p_win_variance <span class="ot">&lt;-</span> <span class="fu">changing_p_win</span>(<span class="at">p_win =</span> p_win_values)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>p_win_variance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
+<pre><code>  p_win goal_prob
+1   0.1     0.224
+2   0.2     0.871
+3   0.3     0.967
+4   0.4     0.995
+5   0.5     0.999
+6   0.6     1.000
+7   0.7     1.000
+8   0.8     1.000
+9   0.9     1.000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(p_win_variance, <span class="fu">aes</span>(<span class="at">x =</span> p_win, <span class="at">y =</span> goal_prob)) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"steelblue3"</span>) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>, <span class="at">by =</span> <span class="fl">0.1</span>)) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Probability of Winning One Round of Slots"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Probability of Reaching Goal Amount"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Reaching Goal Amount Depends on the Probability of Each Singular Round"</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Slots_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
+</div>
+<p>As expected, a greater win probability leads to a greater probability of reaching the goal amount. At win probabilities of 0.4 or greater, the player is almost guaranteed to reach their goal amount.</p>
+<p>However, in reality, slot machine odds are much worse than even the 0.1 win probability tested above. One estimate is that odds fall within a range of 1 in 5,000 to 1 in 34,000,000. To get a more accurate probability, I ran my simulation with a win probability of 1 in 5,000.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>gamble_simulation <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n_runs =</span> <span class="dv">1000</span>, initial_amount, goal_amount, p_win,</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                              win_multiplier) {</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  win_prob <span class="ot">&lt;-</span> <span class="fu">map_lgl</span>(<span class="dv">1</span><span class="sc">:</span>n_runs, <span class="sc">~</span><span class="fu">gamble</span>(initial_amount, goal_amount, p_win,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                                        win_multiplier)) <span class="sc">|&gt;</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>()</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">win_prob =</span> win_prob))</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gamble_simulation</span>(<span class="at">initial_amount =</span> <span class="dv">10</span>, <span class="at">goal_amount =</span> <span class="dv">20</span>, <span class="at">p_win =</span> <span class="fl">0.5</span>, <span class="at">win_multiplier =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">47</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gamble_simulation</span>(<span class="at">initial_amount =</span> <span class="dv">10</span>, <span class="at">goal_amount =</span> <span class="dv">100</span>, <span class="at">p_win =</span> <span class="fl">0.002</span>, <span class="at">win_multiplier =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  win_prob
-1    0.998</code></pre>
+<pre><code>  goal_prob
+1         0</code></pre>
 </div>
+</div>
+<p>Decreasing the win probability to 1 in 5,000 changed the probability of reaching the goal value of $100 to 0, indicating it is extremely unlikely for the player to reach their goal in this scenario with this win probability.</p>
+<p>I was also curious as to how changing the win multiplier would change the probability of reaching the goal value. Because I wanted to be able to view trends in the data, I decided to set the win probability to 0.1 so that the player would have a visible chance at reaching their goal value. Again, I set the initial amount to $10 and the final amount to $100, running the simulation with different win multipliers ranging from 1 (the player wins $1 if they win the round) to 100 (the player wins $100 if they win the round).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>changing_win_multiplier <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n_runs =</span> <span class="dv">1000</span>, <span class="at">initial_amount =</span> <span class="dv">10</span>, <span class="at">goal_amount =</span> <span class="dv">100</span>,</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">p_win =</span> <span class="fl">0.1</span>, win_multiplier) {</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  win_probs <span class="ot">&lt;-</span> <span class="fu">map_dbl</span>(win_multipliers, <span class="cf">function</span>(win_multiplier) {</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    outcome <span class="ot">&lt;-</span> <span class="fu">map_lgl</span>(<span class="dv">1</span><span class="sc">:</span>n_runs, <span class="sc">~</span><span class="fu">gamble</span>(initial_amount, goal_amount, p_win, win_multiplier))</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(outcome)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">win_multiplier =</span> win_multipliers, <span class="at">goal_prob =</span> win_probs))</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>changing_p_win <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n_runs =</span> <span class="dv">1000</span>, <span class="at">initial_amount =</span> <span class="dv">10</span>, <span class="at">goal_amount =</span> <span class="dv">100</span>, p_win,</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">win_multiplier =</span> <span class="dv">10</span>) {</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  win_probs <span class="ot">&lt;-</span> <span class="fu">map_dbl</span>(p_win_values, <span class="cf">function</span>(p_win) {</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    outcome <span class="ot">&lt;-</span> <span class="fu">map_lgl</span>(<span class="dv">1</span><span class="sc">:</span>n_runs, <span class="sc">~</span><span class="fu">gamble</span>(initial_amount, goal_amount, p_win, win_multiplier))</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(outcome)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">p_win =</span> p_win_values, <span class="at">win_prob =</span> win_probs))</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p_win_values <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">47</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">changing_p_win</span>(<span class="at">p_win =</span> p_win_values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>win_multipliers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">10</span>))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">47</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>win_multiplier_variance <span class="ot">&lt;-</span> <span class="fu">changing_win_multiplier</span>(<span class="at">win_multiplier =</span> win_multipliers)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>win_multiplier_variance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  p_win win_prob
-1   0.1    0.224
-2   0.2    0.871
-3   0.3    0.967
-4   0.4    0.995
-5   0.5    0.999
-6   0.6    1.000
-7   0.7    1.000
-8   0.8    1.000
-9   0.9    1.000</code></pre>
+<pre><code>   win_multiplier goal_prob
+1               1     0.000
+2              10     0.227
+3              20     0.583
+4              30     0.640
+5              40     0.635
+6              50     0.655
+7              60     0.639
+8              70     0.676
+9              80     0.651
+10             90     0.633
+11            100     0.637</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(win_multiplier_variance, <span class="fu">aes</span>(<span class="at">x =</span> win_multiplier, <span class="at">y =</span> goal_prob)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"steelblue3"</span>) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">100</span>, <span class="dv">10</span>))) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Win Multiplier"</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Probability of Reaching Goal Amount"</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Win Multiplier Does Not Continually Increase the Probability of Reaching Goal"</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Slots_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>While changing the win multiplier from 1 to 10 and 10 to 20 greatly increased the probability of reaching the goal amount, these same effects were not observed with further increases of the win multiplier. This indicates that once the win multiplier reaches a certain number, it no longer increases the probability of achieving the goal amount. In other words, at a certain point, adding more money to the “jackpot” will not help players reach their goals.</p>
+<p>Lastly, I wanted to see how changing the initial amount of money impacted the probability of reaching the goal amount. For this simulation, I set the goal amount to $100, the win probability to 0.1, and the win multiplier to 10 and tested initial amounts ranging from $1 to $10.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>changing_initial_amount <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n_runs =</span> <span class="dv">1000</span>, initial_amount, <span class="at">goal_amount =</span> <span class="dv">100</span>,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">p_win =</span> <span class="fl">0.1</span>, <span class="at">win_multiplier =</span> <span class="dv">10</span>) {</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  win_probs <span class="ot">&lt;-</span> <span class="fu">map_dbl</span>(initial_amounts, <span class="cf">function</span>(initial_amount) {</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    outcome <span class="ot">&lt;-</span> <span class="fu">map_lgl</span>(<span class="dv">1</span><span class="sc">:</span>n_runs, <span class="sc">~</span><span class="fu">gamble</span>(initial_amount, goal_amount, p_win, win_multiplier))</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(outcome)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">initial_amount =</span> initial_amounts, <span class="at">goal_prob =</span> win_probs))</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">47</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gamble_simulation</span>(<span class="at">initial_amount =</span> <span class="dv">10</span>, <span class="at">goal_amount =</span> <span class="dv">100</span>, <span class="at">p_win =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">5000</span>, <span class="at">win_multiplier =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>initial_amounts <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">1</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">47</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>initial_amount_variance <span class="ot">&lt;-</span> <span class="fu">changing_initial_amount</span>(<span class="at">initial_amount =</span> initial_amounts)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>initial_amount_variance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  win_prob
-1        0</code></pre>
+<pre><code>   initial_amount goal_prob
+1               1     0.021
+2               2     0.052
+3               3     0.072
+4               4     0.103
+5               5     0.110
+6               6     0.139
+7               7     0.142
+8               8     0.164
+9               9     0.169
+10             10     0.200</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(initial_amount_variance, <span class="fu">aes</span>(<span class="at">x =</span> initial_amount, <span class="at">y =</span> goal_prob)) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"steelblue3"</span>) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Initial Amount ($)"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Probability of Reaching Goal Amount"</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Increasing Initial Amount Increases the Probability of Reaching Goal"</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Slots_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
-<div class="cell">
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>changing_win_multiplier <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n_runs =</span> <span class="dv">1000</span>, <span class="at">initial_amount =</span> <span class="dv">10</span>, <span class="at">goal_amount =</span> <span class="dv">100</span>,</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">p_win =</span> <span class="fl">0.1</span>, win_multiplier) {</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  win_probs <span class="ot">&lt;-</span> <span class="fu">map_dbl</span>(win_multipliers, <span class="cf">function</span>(win_multiplier) {</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    outcome <span class="ot">&lt;-</span> <span class="fu">map_lgl</span>(<span class="dv">1</span><span class="sc">:</span>n_runs, <span class="sc">~</span><span class="fu">gamble</span>(initial_amount, goal_amount, p_win, win_multiplier))</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(outcome)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">win_multiplier =</span> win_multipliers, <span class="at">win_prob =</span> win_probs))</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
-<div class="cell">
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>win_multipliers <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">10</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">47</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">changing_win_multiplier</span>(<span class="at">win_multiplier =</span> win_multipliers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>   win_multiplier win_prob
-1               1    0.000
-2              11    0.315
-3              21    0.585
-4              31    0.633
-5              41    0.643
-6              51    0.636
-7              61    0.664
-8              71    0.637
-9              81    0.657
-10             91    0.647</code></pre>
-</div>
-</div>
-<div class="cell">
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>changing_initial_amount <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n_runs =</span> <span class="dv">1000</span>, initial_amount, <span class="at">goal_amount =</span> <span class="dv">100</span>,</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">p_win =</span> <span class="fl">0.1</span>, <span class="at">win_multiplier =</span> <span class="dv">10</span>) {</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  win_probs <span class="ot">&lt;-</span> <span class="fu">map_dbl</span>(initial_amounts, <span class="cf">function</span>(initial_amount) {</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    outcome <span class="ot">&lt;-</span> <span class="fu">map_lgl</span>(<span class="dv">1</span><span class="sc">:</span>n_runs, <span class="sc">~</span><span class="fu">gamble</span>(initial_amount, goal_amount, p_win, win_multiplier))</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(outcome)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="at">initial_amount =</span> initial_amounts, <span class="at">win_prob =</span> win_probs))</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>initial_amounts <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">1</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">47</span>)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">changing_initial_amount</span>(<span class="at">initial_amount =</span> initial_amounts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>   initial_amount win_prob
-1               1    0.021
-2               2    0.052
-3               3    0.072
-4               4    0.103
-5               5    0.110
-6               6    0.139
-7               7    0.142
-8               8    0.164
-9               9    0.169
-10             10    0.200</code></pre>
-</div>
-</div>
+<p>The data shows that increasing the initial amount of money for use at the slot machine increases the probability that a player will reach their goal amount. Thus, players that spend more are more likely to win because spending more money creates more opportunities to fall below the win probability and cash in on a win. This is part of why gambling and slots are so addictive-players believe that if they just try one more time and spend a little more, then in the next round they will hit the jackpot.</p>
 
 
 
