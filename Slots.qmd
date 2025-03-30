@@ -1,7 +1,7 @@
 ---
-title: "Red Lights"
+title: "Slots"
 description: |
-  Do drivers actually "always" hit red lights?
+  Slot machine simulation
 author: Emmie Appl
 date: April 2, 2025
 format:
@@ -13,6 +13,10 @@ execute:
   message: false
 ---
 
+The American Gaming Association recently reported that US casinos generated a record-breaking \$49.78 billion dollars in 2024, a 0.8% increase over 2023 and the fourth-straight record-breaking year. Of this total, slot machines accounted for \$36.06 billion.
+
+To better understand slot machine odds, I sought to create a function in R that simulates the odds that an individual would either reach their goal revenue or go bankrupt at a slot machine. The function takes an initial amount of money, a goal amount of money, a win probability, and a win multiplier value. To determine whether the individual will reach their goal revenue, the function will generate a random uniform number between 0 and 1. If that number is less than or equal to the win probability, the individual will gain revenue from that round, equal to the win multiplier amount. If the random uniform number is greater than the win probability, then they will lose \$1. Then, the next round is played in the form of the generation of another random uniform number. This cycle continues until either 1) the player reaches or exceeds their goal revenue or 2) the player goes bankrupt.
+
 ```{r}
 library(purrr)
 library(ggplot2)
@@ -21,13 +25,15 @@ gamble <- function(initial_amount, goal_amount, p_win, win_multiplier) {
   money <- initial_amount
   
   while(money > 0 & money < goal_amount) {
-    money <- money + ifelse(runif(1) < p_win, win_multiplier, -1)
+    money <- money + ifelse(runif(1) <= p_win, win_multiplier, -1)
   }
   
   # True means that the gambler met their goal amount. False means the gambler went bankrupt.
   return(outcome = ifelse(money <= 0, FALSE, TRUE))
 }
 ```
+
+Some assumptions ingrained into this function are that 1) win probability does not change and 2) each win generates the same amount of revenue.
 
 ```{r}
 gamble(10, 100, 0.1, 10)

@@ -16,8 +16,8 @@ website:
             href: UKdrugs.html
       - text: "String Analyses"
         href: StringAnalysis.html
-      - text: "Red Lights"
-        href: RedLights.html
+      - text: "Slots Simulation"
+        href: Slots.html
 
 format:
   html:
