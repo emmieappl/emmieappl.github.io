@@ -17,19 +17,95 @@ execute:
 library(purrr)
 library(ggplot2)
 
-gamble <- function(initial_amount, goal_amount, p_win) {
+gamble <- function(initial_amount, goal_amount, p_win, win_multiplier) {
   money <- initial_amount
-  steps <- 0
   
-  while(money > 0 & money < goal_amount){
-    money <- money + ifelse(runif(1) < p_win, 1, -1)
-    steps <- steps + 1
+  while(money > 0 & money < goal_amount) {
+    money <- money + ifelse(runif(1) < p_win, win_multiplier, -1)
   }
   
-  return(ifelse(money <= 0, "Bankrupt", "Win"))
+  # True means that the gambler met their goal amount. False means the gambler went bankrupt.
+  return(outcome = ifelse(money <= 0, FALSE, TRUE))
 }
 ```
 
 ```{r}
-gamble(10, 20, 0.5)
+gamble(10, 100, 0.1, 10)
+```
+
+```{r}
+
+gamble_simulation <- function(n_runs = 1000, initial_amount, goal_amount, p_win,
+                              win_multiplier) {
+  win_prob <- map_lgl(1:n_runs, ~gamble(initial_amount, goal_amount, p_win,
+                                        win_multiplier)) |>
+    mean()
+  return(data.frame(win_prob = win_prob))
+}
+```
+
+```{r}
+gamble_simulation(initial_amount = 10, goal_amount = 20, p_win = 0.5, win_multiplier = 10)
+```
+
+```{r}
+changing_p_win <- function(n_runs = 1000, initial_amount = 10, goal_amount = 100, p_win,
+                                win_multiplier = 10) {
+  win_probs <- map_dbl(p_win_values, function(p_win) {
+    outcome <- map_lgl(1:n_runs, ~gamble(initial_amount, goal_amount, p_win, win_multiplier))
+    mean(outcome)
+  })
+  
+  return(data.frame(p_win = p_win_values, win_prob = win_probs))
+}
+```
+
+```{r}
+p_win_values <- seq(0.1, 0.9, by = 0.1)
+
+set.seed(47)
+changing_p_win(p_win = p_win_values)
+```
+
+```{r}
+set.seed(47)
+gamble_simulation(initial_amount = 10, goal_amount = 100, p_win = 1/5000, win_multiplier = 10)
+```
+
+```{r}
+changing_win_multiplier <- function(n_runs = 1000, initial_amount = 10, goal_amount = 100,
+                                    p_win = 0.1, win_multiplier) {
+  win_probs <- map_dbl(win_multipliers, function(win_multiplier) {
+    outcome <- map_lgl(1:n_runs, ~gamble(initial_amount, goal_amount, p_win, win_multiplier))
+    mean(outcome)
+  })
+  
+  return(data.frame(win_multiplier = win_multipliers, win_prob = win_probs))
+}
+```
+
+```{r}
+win_multipliers <- seq(1, 100, 10)
+
+set.seed(47)
+changing_win_multiplier(win_multiplier = win_multipliers)
+```
+
+```{r}
+changing_initial_amount <- function(n_runs = 1000, initial_amount, goal_amount = 100,
+                                    p_win = 0.1, win_multiplier = 10) {
+  win_probs <- map_dbl(initial_amounts, function(initial_amount) {
+    outcome <- map_lgl(1:n_runs, ~gamble(initial_amount, goal_amount, p_win, win_multiplier))
+    mean(outcome)
+  })
+  
+  return(data.frame(initial_amount = initial_amounts, win_prob = win_probs))
+}
+```
+
+```{r}
+initial_amounts <- seq(1, 10, 1)
+
+set.seed(47)
+changing_initial_amount(initial_amount = initial_amounts)
 ```
