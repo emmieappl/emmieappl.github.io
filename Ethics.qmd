@@ -1,0 +1,43 @@
+---
+title: "Ethics in Data Science"
+description: |
+  Exploring the Ethics of AI Recruiting
+author: Emmie Appl
+date: April 16, 2025
+format: html
+execute:
+  warning: false
+  message: false
+---
+
+**Background**
+
+On October 10, 2018, Reuters [first reported](https://www.reuters.com/article/us-amazon-com-jobs-automation-insight-idUSKCN1MK08G/) that the AI tool used by Amazon to recruit employees made decisions biased against female applicants. The tool, designed in 2014, gave candidates scores ranging from 1 to 5 depending on the quality of their resumes. To generate these ratings, the model was trained using resumes that had been submitted to the company, and the hiring outcomes associated with these resumes, over a 10-year period.
+
+By 2015, Amazon realized that the software exhibited gender-bias when rating employees. The root of the issue came from the composition of the training data. Since most Amazon employees were men, the tool was taught that the company preferred male applicants—and started downrating resumes with indications that the individual who submitted the resume was female. It penalized candidates whose resumes included the word "women's" or who had attended all-women's colleges.
+
+After the discovery, Amazon altered the model to treat these terms in a neutral way. However, the project created to design the model was ultimately disbanded at the beginning of 2017, partially due to the risk that the tool would discriminate against certain populations of candidates in a different way.
+
+Amazon insisted the software was only used as a recommendation for recruiters when evaluating candidates, and never as a sole determinant for hiring.
+
+Two days later, on October 12, 2018, the American Civil Liberties Union [published an article](https://www.aclu.org/news/womens-rights/why-amazons-automated-hiring-tool-discriminated-against) in response to the issue. In addition to examining the Amazon tool, the ACLU paper took a more wider perspective, saying that AI tools do not eliminate human bias but simply continue it through software. Gender discrimination is just one example–there is the inherent risk of discriminating against candidates from certain locations, who are members of certain ethnic community organizations, or who speak certain languages. Even video interviews analyzed by AI, a new strategy becoming increasingly popular to evaluate candidates, is subject to bias due to cultural differences in speech and eye movement patterns.
+
+While software that eliminates job candidates (deliberately or accidentally) based on attributes such as race, gender, or religion are illegal under Title VII, it is incredibly difficult to develop a strong case because individuals rejected from positions do not have the means to identify what led to their rejection. At the time of the article, the ACLU was in the process of challenging a federal law criminalizing the testing of employment websites for discrimination. The article finishes with a call to increase transparency around recruiting programs promote investigations into recruiting software by outside auditors.
+
+**Discussion**
+
+-   Who was measured? Are those individuals representative of the people to whom we’d like to generalize / apply the algorithm? Should we analyze data if we do not know how the data were collected?
+
+    -   lots of men
+
+-   What was the consent structure for recruiting participants? Were the participants aware of the ways their data would be used for research? Was informed consent possible? Can you provide informed consent for applications that are yet foreseen?
+
+    -   used employee resumes. how did they get permission to use resumes?
+
+-   Use data to improve life for our users, customers, organizations, and communities.
+
+    -   women applicants were at a disadvantage
+
+-   Were the data made publicly available? Respect and invite fair criticism while promoting the identification and open discussion of errors, risks, and unintended consequences of our work.
+
+    -   didn't allow for external auditing
