@@ -1,0 +1,76 @@
+---
+title: "Open Policing Project"
+description: |
+  State Arrest Rate Comparison
+author: Emmie Appl
+date: April 30, 2025
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+execute:
+  warning: false
+  message: false
+---
+
+```{r}
+library(DBI)
+con_traffic <- DBI::dbConnect(
+  RMariaDB::MariaDB(),
+  dbname = "traffic",
+  host = Sys.getenv("TRAFFIC_HOST"),
+  user = Sys.getenv("TRAFFIC_USER"),
+  password = Sys.getenv("TRAFFIC_PWD")
+)
+```
+
+```{sql}
+#| connection: con_traffic
+
+SHOW TABLES;
+```
+
+```{sql}
+#| connection: con_traffic
+
+DESCRIBE ca_san_francisco_2020_04_01;
+
+```
+
+```{sql}
+#| connection: con_traffic
+
+SELECT "San Francisco" as city,
+  YEAR(date) AS stop_year,
+  AVG(subject_age) AS avg_age
+FROM ca_san_francisco_2020_04_01
+WHERE subject_age IS NOT NULL
+  AND date IS NOT NULL
+GROUP BY YEAR(date)
+
+UNION
+
+SELECT "San Diego" as city,
+  YEAR(date) AS stop_year,
+  AVG(subject_age) AS avg_age
+FROM ca_san_diego_2020_04_01
+WHERE subject_age IS NOT NULL
+  AND date IS NOT NULL
+GROUP BY YEAR(date)
+
+UNION
+
+SELECT "Long Beach" as city,
+  YEAR(date) AS stop_year,
+  AVG(subject_age) AS avg_age
+FROM ca_long_beach_2020_04_01
+WHERE subject_age IS NOT NULL
+  AND date IS NOT NULL
+GROUP BY YEAR(date)
+
+ORDER BY city, stop_year;
+```
+
+```{r}
+dbDisconnect(con_traffic, shutdown = TRUE)
+```
