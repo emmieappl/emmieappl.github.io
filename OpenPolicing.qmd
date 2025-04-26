@@ -11,9 +11,10 @@ format:
 execute:
   warning: false
   message: false
+bibliography: references.bib
 ---
 
-The [Stanford Open Policing Project](https://openpolicing.stanford.edu/), published in 2020, is a compilation of data acquired through millions of traffic stops made by law enforcement agencies across 42 different US states. Some of the data from these stops include records of the driver's age. I wanted to compare the average age of stopped drivers across different California cities, as well as how this metric changed over time. To this end, I analyzed the data for all California cities included in the Open Policing Project that recorded driver age, calculating the average age of stopped drivers in each city for each year.
+The [Stanford Open Policing Project](https://openpolicing.stanford.edu/), published in @pierson2020, is a compilation of data acquired through millions of traffic stops made by law enforcement agencies across 42 different US states. Some of the data from these stops include records of the driver's age. I wanted to compare the average age of stopped drivers across different California cities, as well as how this metric changed over time. To this end, I analyzed the data for all California cities included in the Open Policing Project that recorded driver age, calculating the average age of stopped drivers in each city for each year.
 
 ```{r}
 library(DBI)
@@ -115,7 +116,3 @@ This plot is a line plot tracking the average stopped driver age each year in ea
 **Conclusions**
 
 Together, these two plots compare the average age of stopped drivers between California cities, as well as how that number has changed over time. Comparing the average age of stopped drivers to the average age of all drivers in these cities will lead to understanding whether certain age ranges are more prone to being stopped by law enforcement, or whether these ages simply reflect the average age of the driver population in that city. Seeing how the average stopped driver ages change over time compared to changes in the average driver population age, as well as the average general population age, will reveal whether the changes in average stopped driver age are due to changes in city demographics, or if there may be other underlying reasons for these changes.
-
-**References**
-
-Pierson, Emma, Camelia Simoiu, Jan Overgoor, Sam Corbett-Davies, Daniel Jenson, Amy Shoemaker, Vignesh Ramachandran, et al. 2020. “A Large-Scale Analysis of Racial Disparities in Police Stops Across the United States.” *Nature Human Behaviour*, 1–10.

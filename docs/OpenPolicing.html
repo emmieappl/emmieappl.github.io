@@ -57,7 +57,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -213,7 +233,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>The <a href="https://openpolicing.stanford.edu/">Stanford Open Policing Project</a>, published in 2020, is a compilation of data acquired through millions of traffic stops made by law enforcement agencies across 42 different US states. Some of the data from these stops include records of the driver’s age. I wanted to compare the average age of stopped drivers across different California cities, as well as how this metric changed over time. To this end, I analyzed the data for all California cities included in the Open Policing Project that recorded driver age, calculating the average age of stopped drivers in each city for each year.</p>
+<p>The <a href="https://openpolicing.stanford.edu/">Stanford Open Policing Project</a>, published in <span class="citation" data-cites="pierson2020">Pierson et al. (<a href="#ref-pierson2020" role="doc-biblioref">2020</a>)</span>, is a compilation of data acquired through millions of traffic stops made by law enforcement agencies across 42 different US states. Some of the data from these stops include records of the driver’s age. I wanted to compare the average age of stopped drivers across different California cities, as well as how this metric changed over time. To this end, I analyzed the data for all California cities included in the Open Policing Project that recorded driver age, calculating the average age of stopped drivers in each city for each year.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -331,12 +351,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This plot is a line plot tracking the average stopped driver age each year in each of the 5 cities. The x-axis represents the year that the stop was made and the y-axis shows the average age of drivers stopped in that year. Each line represents a different city and connects the yearly averages to illustrate trends in driver age over time. The average age of stopped drivers in San Francisco increased by about 2 years between 2007 and 2016 in a roughly linear fashion. Bakersfield saw a steady increase of about 2 years between 2008 and 2010, then a drop to an average age of about 35.5 years that remained consistent until the last data point from 2018. The average stopped driver age in Long Beach also rose by approximately 2 years between 2008 and 2010, remaining stable until 2016 when there was about a 1 year jump in the 2017 data. Although the data for Stockton and San Diego only cover 4 and 3 years, respectively, the average stopped driver age is relatively stable.</p>
 <p><strong>Conclusions</strong></p>
 <p>Together, these two plots compare the average age of stopped drivers between California cities, as well as how that number has changed over time. Comparing the average age of stopped drivers to the average age of all drivers in these cities will lead to understanding whether certain age ranges are more prone to being stopped by law enforcement, or whether these ages simply reflect the average age of the driver population in that city. Seeing how the average stopped driver ages change over time compared to changes in the average driver population age, as well as the average general population age, will reveal whether the changes in average stopped driver age are due to changes in city demographics, or if there may be other underlying reasons for these changes.</p>
-<p><strong>References</strong></p>
-<p>Pierson, Emma, Camelia Simoiu, Jan Overgoor, Sam Corbett-Davies, Daniel Jenson, Amy Shoemaker, Vignesh Ramachandran, et al.&nbsp;2020. “A Large-Scale Analysis of Racial Disparities in Police Stops Across the United States.” <em>Nature Human Behaviour</em>, 1–10.</p>
 
 
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-pierson2020" class="csl-entry" role="listitem">
+Pierson, Emma, Camelia Simoiu, Jan Overgoor, Sam Corbett-Davies, Daniel Jenson, Amy Shoemaker, Vignesh Ramachandran, et al. 2020. <span>“A Large-Scale Analysis of Racial Disparities in Police Stops Across the United States.”</span> <em>Nature Human Behaviour</em> 4 (7): 736–45. <a href="https://doi.org/10.1038/s41562-020-0858-1">https://doi.org/10.1038/s41562-020-0858-1</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
