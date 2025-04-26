@@ -20,6 +20,8 @@ website:
         href: Slots.html
       - text: "Ethics"
         href: Ethics.html
+      - text: "Open Policing Project"
+        href: OpenPolicing.html
 
 format:
   html:
