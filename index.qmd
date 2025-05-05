@@ -18,3 +18,15 @@ about:
 ---
 
 Hello there! I am a Pomona College class of 2025 Molecular Biology major and Japanese minor. Currently, I am working as an undergraduate researcher in the Liu Lab studying mannitol-driven biofilm formation in *Vibrio cholerae*. Outside of the lab, I am a captain for the Pomona-Pitzer Swimming & Diving team.
+
+**Introduction**
+
+The purpose of this website is to showcase my proficiency in R through a collection of completed projects. These projects span a variety of topics and applications, including data visualization, simulations, regular expression usage, and integration with database management systems. Through these examples, I aim to highlight both the breadth of my technical skills and my ability to apply them to real-world problems. I hope this serves as a demonstration of my readiness for data-driven roles that require analytical thinking, coding proficiency, and clear communication of results. The table below includes links and brief descriptions for each project. Feel free to take a look!
+
+| Project Name | Description |
+|--------------|-------------|
+|              |             |
+|              |             |
+|              |             |
+|              |             |
+|              |             |

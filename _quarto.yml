@@ -18,10 +18,10 @@ website:
         href: StringAnalysis.html
       - text: "Slots Simulation"
         href: Slots.html
-      - text: "Ethics"
-        href: Ethics.html
       - text: "Open Policing Project"
         href: OpenPolicing.html
+      - text: "Ethics"
+        href: Ethics.html
 
 format:
   html:
