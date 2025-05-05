@@ -19,14 +19,26 @@ about:
 
 Hello there! I am a Pomona College class of 2025 Molecular Biology major and Japanese minor. Currently, I am working as an undergraduate researcher in the Liu Lab studying mannitol-driven biofilm formation in *Vibrio cholerae*. Outside of the lab, I am a captain for the Pomona-Pitzer Swimming & Diving team.
 
-**Introduction**
+## **Introduction**
 
 The purpose of this website is to showcase my proficiency in R through a collection of completed projects. These projects span a variety of topics and applications, including data visualization, simulations, regular expression usage, and integration with database management systems. Through these examples, I aim to highlight both the breadth of my technical skills and my ability to apply them to real-world problems. I hope this serves as a demonstration of my readiness for data-driven roles that require analytical thinking, coding proficiency, and clear communication of results. The table below includes links and brief descriptions for each project. Feel free to take a look!
 
-| Project Name | Description |
-|--------------|-------------|
-|              |             |
-|              |             |
-|              |             |
-|              |             |
-|              |             |
+### Table of Contents
+
++---------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+| Project Name                                                              | Description                                                                                                     |
++:==========================================================================+:================================================================================================================+
+| Data Visualization:                                                       | Visualization of Valentine's Day retail trends from 2010 to 2022 published by the National Retail Federation    |
+|                                                                           |                                                                                                                 |
+| -   [Valentine's Retail](https://emmieappl.github.io/Valentines.html)     | Visualization of data related to drugs considered for authorization in the European Union between 1995 and 2023 |
+|                                                                           |                                                                                                                 |
+| -   [European Drug Development](https://emmieappl.github.io/UKdrugs.html) |                                                                                                                 |
++---------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+| [String Analyses](https://emmieappl.github.io/StringAnalysis.html)        | Analysis of character dialogue from the entire *Friends* sitcom series                                          |
++---------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+| [Slots Simulation](https://emmieappl.github.io/Slots.html)                | Creation of a program simulating a slot machine                                                                 |
++---------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+| [Open Policing Project](https://emmieappl.github.io/OpenPolicing.html)    | Uses SQL code to access and visualize data from the Stanford Open Policing Project                              |
++---------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+| [Ethics](https://emmieappl.github.io/Ethics.html)                         | Opinion piece of the ethics of AI-based hiring tools                                                            |
++---------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+

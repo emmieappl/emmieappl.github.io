@@ -8,9 +8,9 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - text: Data Viz
+      - text: Data Vizualization
         menu:
-          - text: "Valentine's"
+          - text: "Valentine's Retail"
             href: Valentines.html
           - text: "European Drug Development"
             href: UKdrugs.html
@@ -25,7 +25,7 @@ website:
 
 format:
   html:
-    theme: cosmo
+    theme: lux
     css: styles.css
     toc: true
     page-layout: full
