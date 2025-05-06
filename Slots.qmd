@@ -1,5 +1,5 @@
 ---
-title: "Slots Simulation"
+title: "Slots Simulations"
 description: |
   Slot machine simulation
 author: Emmie Appl

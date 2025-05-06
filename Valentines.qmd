@@ -1,5 +1,5 @@
 ---
-title: "Valentine's Day"
+title: "Valentine's Day Retail"
 description: |
   Analysis of Valentine's Day data from TidyTuesday
 author: Emmie Appl
