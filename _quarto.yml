@@ -16,7 +16,7 @@ website:
             href: UKdrugs.html
       - text: "String Analyses"
         href: StringAnalysis.html
-      - text: "Slots Simulation"
+      - text: "Slots Simulations"
         href: Slots.html
       - text: "Open Policing Project"
         href: OpenPolicing.html
