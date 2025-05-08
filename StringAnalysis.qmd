@@ -37,6 +37,7 @@ questions <- friends |>
   
 totalnumber <- friends |>
   select(text, speaker) |>
+  # use the $ in Joey Tribbiani$ to only filter for lines by Joey Tribbiani and not Joey Tribbiani Sr.
   filter(str_detect(speaker, "Rachel Green|Monica Geller|Phoebe Buffay|Joey Tribbiani$|Chandler Bing|Ross Geller")) |>
   mutate(totalphrases = str_count(text, "\\?(?=\\s|$)|\\.(?=\\s|$)|\\!(?=\\s|$)")) |>
   group_by(speaker) |>
