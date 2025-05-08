@@ -13,6 +13,8 @@ execute:
   message: false
 ---
 
+This data is originally from the [Character Mining](https://github.com/emorynlp/character-mining) repository from the [Emory NLP Research Group](https://www.emorynlp.org/#). The data set was converted into a Tidy Format by [Emil Hvitfeld](https://github.com/EmilHvitfeldt/friends) and can be downloaded as the R package "friends." The set contains data that includes every utterance from *Friends* across all 10 seasons.
+
 Firstly, I was curious as to which of the six main *Friends* characters had the most lines overall throughout the entire *Friends* series. The table below shows that Rachel had the most lines throughout the running of the show while Phoebe had the fewest.
 
 ```{r}

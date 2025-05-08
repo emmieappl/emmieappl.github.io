@@ -16,46 +16,48 @@ format: revealjs
 
 Every utterance from *Friends* across all 10 seasons.
 
-- Data originally from the [Character Mining](https://github.com/emorynlp/character-mining) repository from the [Emory NLP Research Group](https://www.emorynlp.org/#).
-- Hvitfeldt E (2021). *friends: The Entire Transcript from Friends in Tidy Format.* R package version 0.1.0.9000, <https://github.com/EmilHvitfeldt/friends>.
+-   Data originally from the [Character Mining](https://github.com/emorynlp/character-mining) repository from the [Emory NLP Research Group](https://www.emorynlp.org/#).
+-   Hvitfeldt E (2021). *friends: The Entire Transcript from Friends in Tidy Format.* R package version 0.1.0.9000, <https://github.com/EmilHvitfeldt/friends>.
 
 ## *Friends* Data Table
 
-```r
+``` r
 library(friends)
 library(tidyverse)
 
 head(friends)
 ```
 
-<div style="font-size: 50%;">
+::: {style="font-size: 50%;"}
 ```{r}
 library(friends)
 library(tidyverse)
 
 knitr::kable(head(friends))
 ```
-</div>
+:::
 
 ## On a break?
-```r
+
+``` r
 on_a_break <- friends |>
   filter(str_detect(text, "on a break"))
 
 on_a_break
 ```
 
-<div style="font-size: 50%;">  
+::: {style="font-size: 50%;"}
 ```{r}
 on_a_break <- friends |>
   filter(str_detect(text, "on a break"))
 
 knitr::kable(on_a_break)
 ```
-</div>
+:::
 
 ## Most Lines?
-```r
+
+``` r
 friends |>
   group_by(speaker) |>
   summarize(num_lines = n()) |>
@@ -63,7 +65,7 @@ friends |>
   head()
 ```
 
-<div style="font-size: 80%;"> 
+::: {style="font-size: 80%;"}
 ```{r}
 num_lines <- friends |>
   group_by(speaker) |>
@@ -73,20 +75,21 @@ num_lines <- friends |>
 
 knitr::kable(num_lines)
 ```
-</div>
+:::
 
 ## Who has the most lines/year?
 
 **friends_info**
-<div style="font-size: 50%;">
+
+::: {style="font-size: 50%;"}
 ```{r}
 knitr::kable(head(friends_info))
 ```
-</div>
-
+:::
 
 ## Calculating lines/year
-```{.python code-line-numbers="1|2|3|4|5-6"}
+
+``` {.python code-line-numbers="1|2|3|4|5-6"}
 withyear <- left_join(friends, friends_info, by = c("season", "episode")) |>
   mutate(year = as.factor(str_sub(air_date, 1, 4))) |>
   select(text, speaker, year) |>
@@ -95,8 +98,8 @@ withyear <- left_join(friends, friends_info, by = c("season", "episode")) |>
   summarize(lines = n())
 ```
 
-::: {.fragment .fade-in}
-<div style="font-size: 80%;">
+:::: {.fragment .fade-in}
+::: {style="font-size: 80%;"}
 ```{r}
 withyear <- left_join(friends, friends_info, by = c("season", "episode")) |>
   mutate(year = as.factor(str_sub(air_date, 1, 4))) |>
@@ -107,13 +110,13 @@ withyear <- left_join(friends, friends_info, by = c("season", "episode")) |>
 
 knitr::kable(head(withyear))
 ```
-</div>
 :::
+::::
 
 ## Visualizing the Data
 
-<div style="font-size: 50%;">
-```r
+:::: {style="font-size: 50%;"}
+``` r
 ggplot(withyear, aes(x = year, y = lines, group = speaker)) +
   geom_line(aes(color = speaker)) +
   labs(
@@ -122,7 +125,8 @@ ggplot(withyear, aes(x = year, y = lines, group = speaker)) +
     title = expression(paste("Number of Lines Spoken by ", italic("Friends "), "Characters from 1994 to 2004"))
   )
 ```
-<div/>
+
+<div>
 
 ```{r}
 ggplot(withyear, aes(x = year, y = lines, group = speaker)) +
@@ -133,3 +137,6 @@ ggplot(withyear, aes(x = year, y = lines, group = speaker)) +
     title = expression(paste("Number of Lines Spoken by ", italic("Friends "), "Characters from 1994 to 2004"))
   )
 ```
+
+</div>
+::::
