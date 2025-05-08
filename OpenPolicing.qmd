@@ -82,15 +82,12 @@ dbDisconnect(con_traffic, shutdown = TRUE)
 ```
 
 ```{r}
+library(dplyr)
 stop_age_table <- stop_age_table |>
   mutate(
     age = as.numeric(age),
     stop_year = as.integer(stop_year)
   )
-```
-
-```{r}
-stop_age_table
 ```
 
 ```{r}

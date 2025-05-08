@@ -13,7 +13,7 @@ execute:
   message: false
 ---
 
-This data was collected by the National Retail Federation in the United States and explores how consumers celebrate Valentine's Day from 2010 to 2022.
+This data was collected by the National Retail Federation in the United States and explores how consumers celebrate Valentine's Day from 2010 to 2022. This data was collected by surveying consumers about how they plan to celebrate Valentine’s Day. I wanted to explore how the amount of money spent on Valentine's Day-related goods has changed over the past twenty years.
 
 ```{r}
 tuesdata <- tidytuesdayR::tt_load('2024-02-13')
@@ -23,12 +23,15 @@ historical_spending <- tuesdata$historical_spending
 library(ggplot2)
 
 ggplot(historical_spending, aes(x = Year, y = PerPerson)) +
-  geom_col() +
+  geom_col(fill = "thistle") +
+  scale_x_continuous(breaks = seq(2010, 2022, by = 1)) +
   labs(
     x = "Year",
     y = "Average Money Spent per Person ($)"
   )
 ```
+
+The average amount of money spent per person for Valentine's Day has increased steadily with a plateau between 2015 to 2019 and a spike in 2020. Because Valentine's Day takes place in February, and this data is based on surveys that take place prior to Valentine's Day, it is difficult to determine whether this spike is related to the COVID-19 pandemic. On one hand, it is possible that consumers spent more to "stock up" before the pandemic hit. However, it is impossible to tell because of a multitude of other factors (economy, job market, etc.) that also impact consumption.
 
 [TidyTuesday 2024-02-13](https://github.com/rfordatascience/tidytuesday/blob/main/data/2024/2024-02-13/readme.md)
 
