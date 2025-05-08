@@ -19,7 +19,7 @@ Every utterance from *Friends* across all 10 seasons.
 - Data originally from the [Character Mining](https://github.com/emorynlp/character-mining) repository from the [Emory NLP Research Group](https://www.emorynlp.org/#).
 - Hvitfeldt E (2021). *friends: The Entire Transcript from Friends in Tidy Format.* R package version 0.1.0.9000, <https://github.com/EmilHvitfeldt/friends>.
 
-## *Friends* Data Set
+## *Friends* Data Table
 
 ```r
 library(friends)
@@ -37,7 +37,7 @@ knitr::kable(head(friends))
 ```
 </div>
 
-## *Friends* Data Set
+## On a break?
 ```r
 on_a_break <- friends |>
   filter(str_detect(text, "on a break"))

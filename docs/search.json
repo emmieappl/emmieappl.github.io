@@ -180,5 +180,19 @@
     "title": "String Analysis Presentation",
     "section": "Visualizing the Data",
     "text": "Visualizing the Data\n\nggplot(withyear, aes(x = year, y = lines, group = speaker)) +\n  geom_line(aes(color = speaker)) +\n  labs(\n    x = \"Year\",\n    y = \"Number of Lines\",\n    title = expression(paste(\"Number of Lines Spoken by \", italic(\"Friends \"), \"Characters from 1994 to 2004\"))\n  )"
+  },
+  {
+    "objectID": "Presentation.html#friends-data-table",
+    "href": "Presentation.html#friends-data-table",
+    "title": "String Analysis Presentation",
+    "section": "Friends Data Table",
+    "text": "Friends Data Table\nlibrary(friends)\nlibrary(tidyverse)\n\nhead(friends)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntext\nspeaker\nseason\nepisode\nscene\nutterance\n\n\n\n\nThere’s nothing to tell! He’s just some guy I work with!\nMonica Geller\n1\n1\n1\n1\n\n\nC’mon, you’re going out with the guy! There’s gotta be something wrong with him!\nJoey Tribbiani\n1\n1\n1\n2\n\n\nAll right Joey, be nice. So does he have a hump? A hump and a hairpiece?\nChandler Bing\n1\n1\n1\n3\n\n\nWait, does he eat chalk?\nPhoebe Buffay\n1\n1\n1\n4\n\n\n(They all stare, bemused.)\nScene Directions\n1\n1\n1\n5\n\n\nJust, ’cause, I don’t want her to go through what I went through with Carl- oh!\nPhoebe Buffay\n1\n1\n1\n6"
+  },
+  {
+    "objectID": "Presentation.html#on-a-break",
+    "href": "Presentation.html#on-a-break",
+    "title": "String Analysis Presentation",
+    "section": "On a break?",
+    "text": "On a break?\non_a_break &lt;- friends |&gt;\n  filter(str_detect(text, \"on a break\"))\n\non_a_break\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntext\nspeaker\nseason\nepisode\nscene\nutterance\n\n\n\n\nWe were on a break!\nRachel Green\n3\n16\n13\n86\n\n\nWell, I guess he says that because they were on a break when it happened, that she should of forgiven him by now.\nJoey Tribbiani\n3\n17\n1\n16\n\n\nWe were on a break!!! Okay!! We were, we were…, yeah. Where are you? I’ll find you.\nRoss Geller\n3\n17\n9\n24\n\n\nWe were on a break!\nRoss Geller\n3\n17\n10\n38\n\n\nWell, if-if she thought they were on a break…\nRoss Geller\n4\n13\n12\n34\n\n\nFortunately, I won’t. And by the way, it seems to be perfectly clear that you were on a break.\nPassenger\n4\n24\n14\n11\n\n\nThis is fun. Hey Rach, remember that whole “We were on a break thing?” Well, I’m sorry, will you marry me?\nRoss Geller\n5\n15\n13\n11\n\n\nWhat about the time I said we were on a break?\nRoss Geller\n6\n5\n4\n23\n\n\nYeah. Oh I just wish we could not be married for a little bit! Y’know I just wish we could be like on a break!\nRachel Green\n6\n15\n10\n6\n\n\n’Cause you guys were on a break.\nBen Geller\n7\n16\n3\n5\n\n\nThat you and daddy were not on a break.\nBen Geller\n7\n16\n10\n5\n\n\nThat’s it?! You call that a fight? Come on! “We were on a break!” “No we weren’t!” What happened to you two?!\nPhoebe Buffay\n8\n8\n12\n13\n\n\nI dunno, well he got over the “We were on a break” thing really quickly.\nPhoebe Buffay\n9\n2\n4\n21\n\n\nAnd that’s why, no matter what mommy says, we really were on a break. Yes we were! Yes we were! Come here gorgeous. Oh! Look at you! You are the cutest little baby ever! You’re just a… a little bitty baby, you know that? But you’ve got… You’ve got big beautiful eyes… Yes you do… and a… and a big round belly. Big baby butt! I like big butts. I like big butts and I cannot lie / you other brothers can’t deny / when a girl walks in with an itty, bitty, waist / and a round thing in your face you get… Oh my God, Emma… you’re laughing! Oh my God, you’ve never done that before, have you? You never done that before… Daddy made you laugh, huh? Well, daddy and Sir Mix Alot… What? What? You… you wanna hear some more? Uhm… My anaconda don’t want none / unless you got buns hon… I’m a terrible father!\nRoss Geller\n9\n7\n1\n1\n\n\nThis is it. Unless we’re on a break.\nRoss Geller\n10\n18\n10\n20"
   }
 ]
