@@ -4,7 +4,6 @@ author: "Emmie Appl"
 format: revealjs
 ---
 
-
 ## *Friends*
 
 ![](Friends_poster.jpeg){fig-align="center"}
@@ -87,7 +86,7 @@ knitr::kable(head(friends_info))
 
 
 ## Calculating lines/year
-```{.python code-line-numbers="1|2|4|5-6"}
+```{.python code-line-numbers="1|2|3|4|5-6"}
 withyear <- left_join(friends, friends_info, by = c("season", "episode")) |>
   mutate(year = as.factor(str_sub(air_date, 1, 4))) |>
   select(text, speaker, year) |>

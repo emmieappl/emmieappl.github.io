@@ -801,7 +801,7 @@ Emmie Appl
 </section>
 <section id="calculating-linesyear" class="slide level2">
 <h2>Calculating lines/year</h2>
-<div class="sourceCode" id="cb4" data-code-line-numbers="1|2|4|5-6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>withyear <span class="op">&lt;-</span> left_join(friends, friends_info, by <span class="op">=</span> c(<span class="st">"season"</span>, <span class="st">"episode"</span>)) <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb4" data-code-line-numbers="1|2|3|4|5-6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>withyear <span class="op">&lt;-</span> left_join(friends, friends_info, by <span class="op">=</span> c(<span class="st">"season"</span>, <span class="st">"episode"</span>)) <span class="op">|&gt;</span></span>
 <span id="cb4-2"><a></a>  mutate(year <span class="op">=</span> <span class="im">as</span>.factor(str_sub(air_date, <span class="dv">1</span>, <span class="dv">4</span>))) <span class="op">|&gt;</span></span>
 <span id="cb4-3"><a></a>  select(text, speaker, year) <span class="op">|&gt;</span></span>
 <span id="cb4-4"><a></a>  <span class="bu">filter</span>(str_detect(speaker, <span class="st">"Rachel Green|Monica Geller|Phoebe Buffay|Joey Tribbiani$|Chandler Bing|Ross Geller"</span>)) <span class="op">|&gt;</span></span>
