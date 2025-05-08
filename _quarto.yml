@@ -22,6 +22,8 @@ website:
         href: OpenPolicing.html
       - text: "Ethics"
         href: Ethics.html
+      - text: "Strings Presentation"
+        href: Presentation.html
 
 format:
   html:

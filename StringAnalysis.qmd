@@ -14,6 +14,7 @@ execute:
 ---
 
 Firstly, I was curious as to which of the six main *Friends* characters had the most lines overall throughout the entire *Friends* series. The table below shows that Rachel had the most lines throughout the running of the show while Phoebe had the fewest.
+
 ```{r}
 library(friends)
 library(tidyverse)
@@ -53,6 +54,7 @@ ggplot(questionsandtotal, aes(x = speaker, y = propquestions)) +
     title = expression(paste("Which ", italic("Friends "), "Character is the Most Inquisitive?"))
   )
 ```
+
 The next question I wanted to answer using the *Friends* data set was "which character asked the most questions?" during their time in the show. I went about answering this question by counting the number of questions each character asked, as well as the number of sentences each character spoke. By dividing the number of questions by the number of sentences (including questions), I calculated the proportion of sentences that were questions for each character. From this, I learned that Monica had the largest proportion of questions while Phoebe had the smallest.
 
 ```{r}
@@ -71,8 +73,9 @@ ggplot(withyear, aes(x = year, y = lines, group = speaker)) +
     title = expression(paste("Number of Lines Spoken by ", italic("Friends "), "Characters from 1994 to 2004"))
   )
 ```
+
 Lastly, I wanted to know how the number of lines spoken by each character changed over the lifetime of the show. Ross began the show with the largest number of lines, but was overtaken by Rachel in 1997. Phoebe consistently had the smallest number of lines, except for in 2001 when Ross' number of lines dropped to below hers. Because the series began in September of 1994 and ended in May of 2004, these years have fewer lines overall compared to the intermediary years.
 
-Hvitfeldt E (2021). *friends: The Entire Transcript from Friends in Tidy Format.* R package version 0.1.0.9000, [https://github.com/EmilHvitfeldt/friends](https://github.com/EmilHvitfeldt/friends).
+Hvitfeldt E (2021). *friends: The Entire Transcript from Friends in Tidy Format.* R package version 0.1.0.9000, <https://github.com/EmilHvitfeldt/friends>.
 
 Data originally from the [Character Mining](https://github.com/emorynlp/character-mining) repository.

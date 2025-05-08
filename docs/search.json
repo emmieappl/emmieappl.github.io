@@ -103,5 +103,82 @@
     "title": "Emmie Appl",
     "section": "Table of Contents",
     "text": "Table of Contents\n\n\n\nProject Name\nDescription\n\n\n\n\nData Visualization:\n\nValentine’s Retail\nEuropean Drug Development\n\nVisualization of Valentine’s Day retail trends from 2010 to 2022 published by the National Retail Federation\nVisualization of data related to drugs considered for authorization in the European Union between 1995 and 2023\n\n\nString Analyses\nAnalysis of character dialogue from the entire Friends sitcom series\n\n\nSlots Simulation\nCreation of a program simulating a slot machine\n\n\nOpen Policing Project\nUses SQL code to access and visualize data from the Stanford Open Policing Project\n\n\nEthics\nOpinion piece of the ethics of AI-based hiring tools"
+  },
+  {
+    "objectID": "Presentation.html#friends",
+    "href": "Presentation.html#friends",
+    "title": "String Analysis Presentation",
+    "section": "Friends",
+    "text": "Friends\n\n\nFriends (NBC, 1994–2004). Image source: Warner Bros. Television."
+  },
+  {
+    "objectID": "Presentation.html#which-friends-character-has-the-most-lines",
+    "href": "Presentation.html#which-friends-character-has-the-most-lines",
+    "title": "String Analysis Presentation",
+    "section": "Which Friends character has the most lines?",
+    "text": "Which Friends character has the most lines?"
+  },
+  {
+    "objectID": "Presentation.html#friends-data-set",
+    "href": "Presentation.html#friends-data-set",
+    "title": "String Analysis Presentation",
+    "section": "Friends Data Set",
+    "text": "Friends Data Set\nEvery utterance from Friends across all 10 seasons.\n\nData originally from the Character Mining repository.\nHvitfeldt E (2021). friends: The Entire Transcript from Friends in Tidy Format. R package version 0.1.0.9000, https://github.com/EmilHvitfeldt/friends."
+  },
+  {
+    "objectID": "Presentation.html#friends-data-set-1",
+    "href": "Presentation.html#friends-data-set-1",
+    "title": "String Analysis Presentation",
+    "section": "Friends Data Set",
+    "text": "Friends Data Set\nlibrary(friends)\nlibrary(tidyverse)\n\nhead(friends)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntext\nspeaker\nseason\nepisode\nscene\nutterance\n\n\n\n\nThere’s nothing to tell! He’s just some guy I work with!\nMonica Geller\n1\n1\n1\n1\n\n\nC’mon, you’re going out with the guy! There’s gotta be something wrong with him!\nJoey Tribbiani\n1\n1\n1\n2\n\n\nAll right Joey, be nice. So does he have a hump? A hump and a hairpiece?\nChandler Bing\n1\n1\n1\n3\n\n\nWait, does he eat chalk?\nPhoebe Buffay\n1\n1\n1\n4\n\n\n(They all stare, bemused.)\nScene Directions\n1\n1\n1\n5\n\n\nJust, ’cause, I don’t want her to go through what I went through with Carl- oh!\nPhoebe Buffay\n1\n1\n1\n6"
+  },
+  {
+    "objectID": "Presentation.html#friends-data-set-2",
+    "href": "Presentation.html#friends-data-set-2",
+    "title": "String Analysis Presentation",
+    "section": "Friends Data Set",
+    "text": "Friends Data Set\non_a_break &lt;- friends |&gt;\n  filter(str_detect(text, \"on a break\"))\n\non_a_break\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ntext\nspeaker\nseason\nepisode\nscene\nutterance\n\n\n\n\nWe were on a break!\nRachel Green\n3\n16\n13\n86\n\n\nWell, I guess he says that because they were on a break when it happened, that she should of forgiven him by now.\nJoey Tribbiani\n3\n17\n1\n16\n\n\nWe were on a break!!! Okay!! We were, we were…, yeah. Where are you? I’ll find you.\nRoss Geller\n3\n17\n9\n24\n\n\nWe were on a break!\nRoss Geller\n3\n17\n10\n38\n\n\nWell, if-if she thought they were on a break…\nRoss Geller\n4\n13\n12\n34\n\n\nFortunately, I won’t. And by the way, it seems to be perfectly clear that you were on a break.\nPassenger\n4\n24\n14\n11\n\n\nThis is fun. Hey Rach, remember that whole “We were on a break thing?” Well, I’m sorry, will you marry me?\nRoss Geller\n5\n15\n13\n11\n\n\nWhat about the time I said we were on a break?\nRoss Geller\n6\n5\n4\n23\n\n\nYeah. Oh I just wish we could not be married for a little bit! Y’know I just wish we could be like on a break!\nRachel Green\n6\n15\n10\n6\n\n\n’Cause you guys were on a break.\nBen Geller\n7\n16\n3\n5\n\n\nThat you and daddy were not on a break.\nBen Geller\n7\n16\n10\n5\n\n\nThat’s it?! You call that a fight? Come on! “We were on a break!” “No we weren’t!” What happened to you two?!\nPhoebe Buffay\n8\n8\n12\n13\n\n\nI dunno, well he got over the “We were on a break” thing really quickly.\nPhoebe Buffay\n9\n2\n4\n21\n\n\nAnd that’s why, no matter what mommy says, we really were on a break. Yes we were! Yes we were! Come here gorgeous. Oh! Look at you! You are the cutest little baby ever! You’re just a… a little bitty baby, you know that? But you’ve got… You’ve got big beautiful eyes… Yes you do… and a… and a big round belly. Big baby butt! I like big butts. I like big butts and I cannot lie / you other brothers can’t deny / when a girl walks in with an itty, bitty, waist / and a round thing in your face you get… Oh my God, Emma… you’re laughing! Oh my God, you’ve never done that before, have you? You never done that before… Daddy made you laugh, huh? Well, daddy and Sir Mix Alot… What? What? You… you wanna hear some more? Uhm… My anaconda don’t want none / unless you got buns hon… I’m a terrible father!\nRoss Geller\n9\n7\n1\n1\n\n\nThis is it. Unless we’re on a break.\nRoss Geller\n10\n18\n10\n20"
+  },
+  {
+    "objectID": "Presentation.html#most-lines",
+    "href": "Presentation.html#most-lines",
+    "title": "String Analysis Presentation",
+    "section": "Most Lines?",
+    "text": "Most Lines?\nfriends |&gt;\n  group_by(speaker) |&gt;\n  summarize(num_lines = n()) |&gt;\n  arrange(desc(num_lines)) |&gt;\n  head()\n\n\n\n\n\n\nspeaker\nnum_lines\n\n\n\n\nRachel Green\n9307\n\n\nRoss Geller\n9157\n\n\nChandler Bing\n8462\n\n\nMonica Geller\n8440\n\n\nJoey Tribbiani\n8171\n\n\nPhoebe Buffay\n7499"
+  },
+  {
+    "objectID": "Presentation.html#most-questions",
+    "href": "Presentation.html#most-questions",
+    "title": "String Analysis Presentation",
+    "section": "Most Questions?",
+    "text": "Most Questions?\nquestions &lt;- friends |&gt;\n  select(text, speaker) |&gt;\n  filter(str_detect(speaker, \"Rachel Green|Monica Geller|Phoebe Buffay|Joey Tribbiani$|Chandler Bing|Ross Geller\")) |&gt;\n  mutate(totalquestions = str_count(text, \"\\\\?\")) |&gt;\n  group_by(speaker) |&gt;\n  summarize(num_questions = sum(totalquestions))"
+  },
+  {
+    "objectID": "Presentation.html#most-questions-1",
+    "href": "Presentation.html#most-questions-1",
+    "title": "String Analysis Presentation",
+    "section": "Most Questions?",
+    "text": "Most Questions?\nquestions &lt;- friends |&gt;\n  select(text, speaker) |&gt;\n  filter(str_detect(speaker, \"Rachel Green|Monica Geller|Phoebe Buffay|Joey Tribbiani$|Chandler Bing|Ross Geller\")) |&gt;\n  mutate(totalquestions = str_count(text, \"\\\\?\")) |&gt;\n  group_by(speaker) |&gt;\n  summarize(num_questions = sum(totalquestions))\n  \n\ntotalnumber &lt;- friends |&gt;\n  select(text, speaker) |&gt;\n  filter(str_detect(speaker, \"Rachel Green|Monica Geller|Phoebe Buffay|Joey Tribbiani$|Chandler Bing|Ross Geller\")) |&gt;\n  mutate(totalphrases = str_count(text, \"\\\\?(?=\\\\s|$)|\\\\.(?=\\\\s|$)|\\\\!(?=\\\\s|$)\")) |&gt;\n  group_by(speaker) |&gt;\n  summarize(num_phrases = sum(totalphrases))"
+  },
+  {
+    "objectID": "Presentation.html#who-has-the-most-linesyear",
+    "href": "Presentation.html#who-has-the-most-linesyear",
+    "title": "String Analysis Presentation",
+    "section": "Who has the most lines/year?",
+    "text": "Who has the most lines/year?\nfriends_info\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nseason\nepisode\ntitle\ndirected_by\nwritten_by\nair_date\nus_views_millions\nimdb_rating\n\n\n\n\n1\n1\nThe Pilot\nJames Burrows\nDavid Crane & Marta Kauffman\n1994-09-22\n21.5\n8.3\n\n\n1\n2\nThe One with the Sonogram at the End\nJames Burrows\nDavid Crane & Marta Kauffman\n1994-09-29\n20.2\n8.1\n\n\n1\n3\nThe One with the Thumb\nJames Burrows\nJeffrey Astrof & Mike Sikowitz\n1994-10-06\n19.5\n8.2\n\n\n1\n4\nThe One with George Stephanopoulos\nJames Burrows\nAlexa Junge\n1994-10-13\n19.7\n8.1\n\n\n1\n5\nThe One with the East German Laundry Detergent\nPamela Fryman\nJeff Greenstein & Jeff Strauss\n1994-10-20\n18.6\n8.5\n\n\n1\n6\nThe One with the Butt\nArlene Sanford\nAdam Chase & Ira Ungerleider\n1994-10-27\n18.2\n8.1"
+  },
+  {
+    "objectID": "Presentation.html#calculating-linesyear",
+    "href": "Presentation.html#calculating-linesyear",
+    "title": "String Analysis Presentation",
+    "section": "Calculating lines/year",
+    "text": "Calculating lines/year\nwithyear &lt;- left_join(friends, friends_info, by = c(\"season\", \"episode\")) |&gt;\n  mutate(year = as.factor(str_sub(air_date, 1, 4))) |&gt;\n  select(text, speaker, year) |&gt;\n  filter(str_detect(speaker, \"Rachel Green|Monica Geller|Phoebe Buffay|Joey Tribbiani$|Chandler Bing|Ross Geller\")) |&gt;\n  group_by(speaker, year) |&gt;\n  summarize(lines = n())\n\n\n\n\n\n\n\nspeaker\nyear\nlines\n\n\n\n\nChandler Bing\n1994\n337\n\n\nChandler Bing\n1995\n760\n\n\nChandler Bing\n1996\n858\n\n\nChandler Bing\n1997\n897\n\n\nChandler Bing\n1998\n895\n\n\nChandler Bing\n1999\n975"
+  },
+  {
+    "objectID": "Presentation.html#visualizing-the-data",
+    "href": "Presentation.html#visualizing-the-data",
+    "title": "String Analysis Presentation",
+    "section": "Visualizing the Data",
+    "text": "Visualizing the Data\n\nggplot(withyear, aes(x = year, y = lines, group = speaker)) +\n  geom_line(aes(color = speaker)) +\n  labs(\n    x = \"Year\",\n    y = \"Number of Lines\",\n    title = expression(paste(\"Number of Lines Spoken by \", italic(\"Friends \"), \"Characters from 1994 to 2004\"))\n  )"
   }
 ]
