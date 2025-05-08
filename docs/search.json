@@ -123,7 +123,7 @@
     "href": "Presentation.html#friends-data-set",
     "title": "String Analysis Presentation",
     "section": "Friends Data Set",
-    "text": "Friends Data Set\nEvery utterance from Friends across all 10 seasons.\n\nData originally from the Character Mining repository.\nHvitfeldt E (2021). friends: The Entire Transcript from Friends in Tidy Format. R package version 0.1.0.9000, https://github.com/EmilHvitfeldt/friends."
+    "text": "Friends Data Set\nEvery utterance from Friends across all 10 seasons.\n\nData originally from the Character Mining repository from the Emory NLP Research Group.\nHvitfeldt E (2021). friends: The Entire Transcript from Friends in Tidy Format. R package version 0.1.0.9000, https://github.com/EmilHvitfeldt/friends."
   },
   {
     "objectID": "Presentation.html#friends-data-set-1",
