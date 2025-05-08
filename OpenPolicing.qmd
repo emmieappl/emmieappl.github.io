@@ -33,51 +33,46 @@ con_traffic <- DBI::dbConnect(
 
 SELECT "San Francisco" as city,
   YEAR(date) AS stop_year,
-  AVG(subject_age) AS avg_age
+  subject_age AS age
 FROM ca_san_francisco_2020_04_01
 WHERE subject_age IS NOT NULL
   AND date IS NOT NULL
-GROUP BY YEAR(date)
 
 UNION
 
 SELECT "Bakersfield" as city,
   YEAR(date) AS stop_year,
-  AVG(subject_age) AS avg_age
+  subject_age AS age
 FROM ca_bakersfield_2020_04_01
 WHERE subject_age IS NOT NULL
   AND date IS NOT NULL
-GROUP BY YEAR(date)
 
 UNION
 
 SELECT "Long Beach" as city,
   YEAR(date) AS stop_year,
-  AVG(subject_age) AS avg_age
+  subject_age AS age
 FROM ca_long_beach_2020_04_01
 WHERE subject_age IS NOT NULL
   AND date IS NOT NULL
-GROUP BY YEAR(date)
 
 UNION
 
 SELECT "San Diego" as city,
   YEAR(date) AS stop_year,
-  AVG(subject_age) AS avg_age
+  subject_age AS age
 FROM ca_san_diego_2020_04_01
 WHERE subject_age IS NOT NULL
   AND date IS NOT NULL
-GROUP BY YEAR(date)
 
 UNION
 
 SELECT "Stockton" as city,
   YEAR(date) AS stop_year,
-  AVG(subject_age) AS avg_age
+  subject_age AS age
 FROM ca_stockton_2020_04_01
 WHERE subject_age IS NOT NULL
   AND date IS NOT NULL
-GROUP BY YEAR(date)
 
 ORDER BY city, stop_year;
 ```
@@ -87,18 +82,43 @@ dbDisconnect(con_traffic, shutdown = TRUE)
 ```
 
 ```{r}
-library(ggplot2)
-ggplot(stop_age_table, aes(x = city, y = avg_age)) +
-  geom_boxplot() +
-  labs(title = "Distribution of Average Stopped Driver Age by City",
-       x = "City",
-       y = "Average Stopped Driver Age")
+stop_age_table <- stop_age_table |>
+  mutate(
+    age = as.numeric(age),
+    stop_year = as.integer(stop_year)
+  )
 ```
 
-This plot is a box plot comparing the average stopped driver ages between California cities across all years from which data is available. The x-axis represents the 5 different cities (L to R: Bakersfield, Long Beach, San Diego, San Francisco, Stockton) and the y-axis shows the average driver age for each city. In each box, the vertical spread represents the variation in the average stopped driver age across different years. The middle line of each box marks the median average age, and the box boundaries represent the interquartile range. Individual points represent the average stopped driver age from a singular year. San Francisco had the highest average stopped driver age, followed by San Diego and then Bakersfield. Long Beach and Stockton had the lowest average stopped driver ages.
+```{r}
+stop_age_table
+```
 
 ```{r}
-stop_age_table |>
+every_three_years <- stop_age_table |>
+  filter(stop_year %in% c(2008, 2011, 2014, 2017))
+
+library(ggplot2)
+ggplot(every_three_years, aes(x = city, y = age)) +
+  facet_wrap(vars(stop_year)) +
+  geom_boxplot() +
+  scale_x_discrete(labels = c(
+    "San Diego" = "SD",
+    "San Francisco" = "SF",
+    "Long Beach" = "LB"
+  )) +
+  labs(title = "Distribution of Average Stopped Driver Age by City Every Three Years",
+       x = "City",
+       y = "Stopped Driver Age")
+```
+
+This plot is a faceted box plot comparing the stopped driver ages between California cities in the years 2008, 2011, 2014, and 2017. The x-axis represents the 5 different cities (L to R: Bakersfield, Long Beach (LB), San Diego (SD), San Francisco (SF), Stockton) and the y-axis shows the stopped driver age. In each boxplot, the vertical spread represents the variation in the average stopped driver age across different years. The middle line of each box marks the median age, and the box boundaries represent the interquartile range. Individual points represent the individual stopped driver ages from a singular year. The absence of a boxplot represents the absence of data for that city in that year. San Francisco consistently had a higher median stopped driver age compared to the other California cities in all years that data was collected. Most cities had a median stropped driver age of or slightly above 50 years.
+
+```{r}
+avg_ages <- stop_age_table |>
+  group_by(city, stop_year) |>
+  summarize(avg_age = mean(age), .groups = "drop")
+
+avg_ages |>
   ggplot(aes(x = stop_year, y = avg_age)) +
   scale_x_continuous(breaks = seq(2007, 2018, by = 1)) +
   geom_line(aes(color = city)) +
@@ -111,7 +131,7 @@ stop_age_table |>
   
 ```
 
-This plot is a line plot tracking the average stopped driver age each year in each of the 5 cities. The x-axis represents the year that the stop was made and the y-axis shows the average age of drivers stopped in that year. Each line represents a different city and connects the yearly averages to illustrate trends in driver age over time. The average age of stopped drivers in San Francisco increased by about 2 years between 2007 and 2016 in a roughly linear fashion. Bakersfield saw a steady increase of about 2 years between 2008 and 2010, then a drop to an average age of about 35.5 years that remained consistent until the last data point from 2018. The average stopped driver age in Long Beach also rose by approximately 2 years between 2008 and 2010, remaining stable until 2016 when there was about a 1 year jump in the 2017 data. Although the data for Stockton and San Diego only cover 4 and 3 years, respectively, the average stopped driver age is relatively stable.
+This plot is a line plot tracking the average stopped driver age each year in each of the 5 cities. The x-axis represents the year that the stop was made and the y-axis shows the average age of drivers stopped in that year. Each line represents a different city and connects the yearly averages to illustrate trends in driver age over time. The average age of stopped drivers in San Francisco dipped from about 56 to 53 after 2008 and began climbing again starting in 2011. Bakersfield saw a steady increase of about 2 years between 2008 and 2010, then a drop to an average age of about 35.5 years that remained consistent until the last data point from 2018. The average stopped driver age in Long Beach also rose by approximately 2 years between 2008 and 2013, remaining stable until 2016 when there was sharp decrease. Although the data for Stockton and San Diego only cover 4 and 3 years, respectively, the average stopped driver ages remained within about a 2 year window.
 
 **Conclusions**
 
