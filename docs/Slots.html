@@ -160,6 +160,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="./Ethics.html"> 
 <span class="menu-text">Ethics</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Presentation.html"> 
+<span class="menu-text">Strings Presentation</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -214,7 +218,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>The American Gaming Association recently reported that US casinos generated a record-breaking $49.78 billion dollars in 2024, a 0.8% increase over 2023 and the fourth-straight record-breaking year. Of this total, slot machines accounted for $36.06 billion.</p>
-<p>To better understand slot machine odds, I sought to create a function in R that simulates the odds that an individual would either reach their goal revenue or go bankrupt at a slot machine. The function takes an initial amount of money, a goal amount of money, a win probability, and a win multiplier value. To determine whether the individual will reach their goal amount, the function generates a random uniform number between 0 and 1. If that number is less than or equal to the win probability, the individual will gain revenue from that round, equal to the win multiplier amount. If the random uniform number is greater than the win probability, then they will lose $1. Then, the next round is played by generating another random uniform number. This cycle continues until either 1) the player reaches or exceeds their goal amount or 2) the player goes bankrupt.</p>
+<p>To better understand slot machine win probabilities, I sought to create a function in R that simulates the probability that an individual would either reach their goal revenue or go bankrupt at a slot machine. The function takes an initial amount of money, a goal amount of money, a win probability, and a win multiplier value. To determine whether the individual will reach their goal amount, the function generates a random uniform number between 0 and 1. If that number is less than or equal to the win probability, the individual will gain revenue from that round, equal to the win multiplier amount. If the random uniform number is greater than the win probability, then they will lose $1. Then, the next round is played by generating another random uniform number. This cycle continues until either 1) the player reaches or exceeds their goal amount or 2) the player goes bankrupt.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -289,7 +293,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>As expected, a greater win probability leads to a greater probability of reaching the goal amount. At win probabilities of 0.4 or greater, the player is almost guaranteed to reach their goal amount.</p>
-<p>However, in reality, slot machine odds are much worse than even the 0.1 win probability tested above. One estimate is that odds fall within a range of 1 in 5,000 to 1 in 34,000,000. To get a more accurate probability, I ran my simulation with a win probability of 1 in 5,000.</p>
+<p>However, in reality, slot machine probabilities are much worse than even the 0.1 win probability tested above. One estimate is that win probabilities fall within a range of 1 in 5,000 to 1 in 34,000,000. To get a more accurate probability, I ran my simulation with a win probability of 1 in 5,000.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">47</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gamble_simulation</span>(<span class="at">initial_amount =</span> <span class="dv">10</span>, <span class="at">goal_amount =</span> <span class="dv">100</span>, <span class="at">p_win =</span> <span class="fl">0.002</span>, <span class="at">win_multiplier =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
