@@ -15,7 +15,7 @@ execute:
 
 This data set includes the drugs considered for authorization in the European Union between 1995 and 2023. A generic medicine is developed to be the same as a medicine that has already been authorized, with the same active ingredient(s) and dosage(s) to treat the same condition(s). Accelerated assessment indicates that the medicine is a major interest for public health, so its time frame for review is 150 evaluation days rather than 210.
 
-```{r}
+```{r fig.alt = "Bar chart comparing the number of drugs considered for authorization in the European Union between 1995 and 2023 that were generic medicines or not generic medicines. There were about 1650 non generic medicines and 300 generic medicines. In addition, the number of drugs in each category that were approved for accelerated assessment is denoted by a different color fill within the bar. No generic medicines were approved for accelerated assessment while approximately 100 generic medicines were approved for accelerated assessment."}
 tuesdata <- tidytuesdayR::tt_load('2023-03-14')
 
 drugs <- tuesdata$drugs

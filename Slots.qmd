@@ -59,7 +59,7 @@ changing_p_win <- function(n_runs = 1000, initial_amount = 10, goal_amount = 100
 
 The probability of reaching the goal amount was calculated for different win probabilities ranging from 0.1 to 0.9. Below are the results.
 
-```{r}
+```{r fig.alt = "Bar chart with the probability of winning one round of slots on the x-axis and the probability of reaching the goal amount on the y-axis. A greater win probability leads to a greater probability of reaching the goal amount. At win probabilities of 0.4 or greater, the probability of reaching the goal amount nears 1.0."}
 p_win_values <- seq(0.1, 0.9, by = 0.1)
 
 set.seed(47)
@@ -102,7 +102,7 @@ changing_win_multiplier <- function(n_runs = 1000, initial_amount = 10, goal_amo
 }
 ```
 
-```{r}
+```{r fig.alt = "Bar chart with win multiplier on the x-axis and the probability of reaching the goal amount on the y-axis. While changing the win multiplier from 1 to 10 and 10 to 20 greatly increased the probability of reaching the goal amount, this pattern does not continue with further increases of the win multiplier."}
 win_multipliers <- c(1, seq(10, 100, 10))
 
 set.seed(47)
@@ -136,7 +136,7 @@ changing_initial_amount <- function(n_runs = 1000, initial_amount, goal_amount =
 }
 ```
 
-```{r}
+```{r fig.alt = "Bar chart with initial amount on the x-axis and the probability of reaching the goal amount on the y-axis. As the initial amount increases, the probability of reaching the goal amount also increases at a steady rate."}
 initial_amounts <- seq(1, 10, 1)
 
 set.seed(47)

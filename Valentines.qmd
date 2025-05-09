@@ -15,7 +15,7 @@ execute:
 
 This data was collected by the National Retail Federation in the United States and explores how consumers celebrate Valentine's Day from 2010 to 2022. This data was collected by surveying consumers about how they plan to celebrate Valentine’s Day. I wanted to explore how the amount of money spent on Valentine's Day-related goods has changed over the past twenty years.
 
-```{r}
+```{r fig.alt = "Bar plot showing the average amount of money spent per person for Valentine's Day from 2010 to 2022. The amount spent increased steadily with a plateau between 2015 to 2019 and a spike in 2020"}
 tuesdata <- tidytuesdayR::tt_load('2024-02-13')
 
 historical_spending <- tuesdata$historical_spending
