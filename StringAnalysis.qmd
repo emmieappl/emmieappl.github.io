@@ -32,20 +32,22 @@ friends |>
 ```{r}
 questions <- friends |>
   select(text, speaker) |>
+  # use the $ in Joey Tribbiani$ to only filter for lines by Joey Tribbiani and not Joey Tribbiani Sr.
   filter(str_detect(speaker, "Rachel Green|Monica Geller|Phoebe Buffay|Joey Tribbiani$|Chandler Bing|Ross Geller")) |>
+  # looking for phrases that end with a ?
   mutate(totalquestions = str_count(text, "\\?")) |>
   group_by(speaker) |>
   summarize(num_questions = sum(totalquestions))
   
 totalnumber <- friends |>
   select(text, speaker) |>
-  # use the $ in Joey Tribbiani$ to only filter for lines by Joey Tribbiani and not Joey Tribbiani Sr.
   filter(str_detect(speaker, "Rachel Green|Monica Geller|Phoebe Buffay|Joey Tribbiani$|Chandler Bing|Ross Geller")) |>
   mutate(totalphrases = str_count(text, "\\?(?=\\s|$)|\\.(?=\\s|$)|\\!(?=\\s|$)")) |>
   group_by(speaker) |>
   summarize(num_phrases = sum(totalphrases))
   
 questionsandtotal <- full_join(questions, totalnumber) |>
+  # calculating the proportion of phrases that are questions
   mutate(propquestions = num_questions/num_phrases) |>
   arrange(desc(propquestions))
 
