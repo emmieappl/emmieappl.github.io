@@ -84,6 +84,8 @@ dbDisconnect(con_traffic, shutdown = TRUE)
 
 ```{r}
 library(dplyr)
+
+# converting number values from the SQL data set to numerics
 stop_age_table <- stop_age_table |>
   mutate(
     age = as.numeric(age),
@@ -92,13 +94,16 @@ stop_age_table <- stop_age_table |>
 ```
 
 ```{r}
+# filtering for data from 2008, 2011, 2014, and 2017
 every_three_years <- stop_age_table |>
   filter(stop_year %in% c(2008, 2011, 2014, 2017))
 
 library(ggplot2)
 ggplot(every_three_years, aes(x = city, y = age)) +
+  # facetting by year
   facet_wrap(vars(stop_year)) +
   geom_boxplot() +
+  # renaming some of the labels so that they fit without overlapping
   scale_x_discrete(labels = c(
     "San Diego" = "SD",
     "San Francisco" = "SF",
@@ -112,6 +117,7 @@ ggplot(every_three_years, aes(x = city, y = age)) +
 This plot is a faceted box plot comparing the stopped driver ages between California cities in the years 2008, 2011, 2014, and 2017. The x-axis represents the 5 different cities (L to R: Bakersfield, Long Beach (LB), San Diego (SD), San Francisco (SF), Stockton) and the y-axis shows the stopped driver age. In each boxplot, the vertical spread represents the variation in the average stopped driver age across different years. The middle line of each box marks the median age, and the box boundaries represent the interquartile range. Individual points represent the individual stopped driver ages from a singular year. The absence of a boxplot represents the absence of data for that city in that year. San Francisco consistently had a higher median stopped driver age compared to the other California cities in all years that data was collected. Most cities had a median stropped driver age of or slightly above 50 years.
 
 ```{r}
+# calculating average age in each city for each year
 avg_ages <- stop_age_table |>
   group_by(city, stop_year) |>
   summarize(avg_age = mean(age), .groups = "drop")
